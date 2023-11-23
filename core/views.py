@@ -2,11 +2,11 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView, DetailView
 
 from .forms import OnlineApplicationForm
 from .models import Class, GalleryCategory, Gallery, GamesCategory, Games, Transportation, Route, OurCareer, Testimony, \
-    Articles, Subject, AdmissionForm, OnlineApplication
+    Articles, Subject, AdmissionForm, OnlineApplication, Journal
 
 
 # Create your views here.
@@ -216,3 +216,15 @@ class CreateAdmissionView(CreateView):
     form_class = OnlineApplicationForm
     template_name = 'core/admission.html'
     success_url = reverse_lazy('home')
+
+
+class JournalListView(ListView):
+    model = Journal
+    template_name = 'core/journal.html'
+    context_object_name = 'articles'
+
+
+class JournalDetailView(DetailView):
+    model = Journal
+    template_name = 'core/journal_details.html'
+    context_object_name = 'article'
