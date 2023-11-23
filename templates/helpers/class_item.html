@@ -1,0 +1,40 @@
+{% load static %}
+
+<div class="col-lg-4 mb-5">
+            <div class="card border-0 bg-light shadow-sm pb-2">
+              <img class="card-img-top mb-2" src="{{ class.picture.url }}" alt="" />
+              <div class="card-body text-center">
+                <h4 class="card-title">{{class.name}}</h4>
+                <p class="card-text">
+                  {{class.description}}
+                </p>
+              </div>
+              <div class="card-footer bg-transparent py-4 px-5">
+                <div class="row border-bottom">
+                  <div class="col-6 py-1 text-right border-right">
+                    <strong>Age of Kids</strong>
+                  </div>
+                  <div class="col-6 py-1">{{ class.min_age }} - {{ class.max_age }} Years</div>
+                </div>
+                <div class="row border-bottom">
+                  <div class="col-6 py-1 text-right border-right">
+                    <strong>Total Seats</strong>
+                  </div>
+                  <div class="col-6 py-1">{{ class.total_seats }} Seats</div>
+                </div>
+                <div class="row border-bottom">
+                  <div class="col-6 py-1 text-right border-right">
+                    <strong>Class Time</strong>
+                  </div>
+                  <div class="col-6 py-1">{{ class.start_time }} - {{ class.close_time }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-6 py-1 text-right border-right">
+                    <strong>Tuition Fee</strong>
+                  </div>
+                  <div class="col-6 py-1">GHS {{ class.tuition_fee }} / {{ class.tuition_interval }}</div>
+                </div>
+              </div>
+              <a href="{% url 'class_detail' class.slug %}" class="btn btn-primary px-4 mx-auto mb-4">View Class</a>
+            </div>
+          </div>

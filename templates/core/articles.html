@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Our Articles
+{% endblock title %}
+
+
+{% block content %}
+
+<!-- Header Start -->
+    <div class="container-fluid bg-primary mb-5">
+      <div
+        class="d-flex flex-column align-items-center justify-content-center"
+        style="min-height: 400px"
+      >
+        <h3 class="display-3 font-weight-bold text-white">Our Articles</h3>
+        <div class="d-inline-flex text-white">
+          <p class="m-0"><a class="text-white" href="{% url 'home' %}">Home</a></p>
+          <p class="m-0 px-2">/</p>
+          <p class="m-0">Our Articles</p>
+        </div>
+      </div>
+    </div>
+<!-- Header End -->
+
+
+<!-- Facilities Start -->
+    <div class="container-fluid pt-5">
+      <div class="container pb-3">
+        <div class="row">
+          {% for article in  articles %}
+          <div class="col-lg-4 col-md-6 pb-1">
+            <div
+              class="d-flex bg-light shadow-sm border-top rounded mb-4"
+              style="padding: 30px"
+            >
+              <div class="pl-4">
+                <h4>{{ article.title }}</h4>
+                <p class="m-0">
+                  {{ article.category }}
+                </p>
+                <p class="m-0">
+                  {{ article.blockquote }}
+                </p>
+                <p class="m-0">
+                  {{ article.author }}
+                </p>
+                <a href="{% url 'article_details' article.id %}">View Details</a>
+              </div>
+            </div>
+          </div>
+          {% empty %}
+            <p class="empty">No Articles Added</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <!-- Facilities Start -->
+
+{% endblock content %}
