@@ -1,8 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
+
+from .forms import OnlineApplicationForm
 from .models import Class, GalleryCategory, Gallery, GamesCategory, Games, Transportation, Route, OurCareer, Testimony, \
-    Articles, Subject
+    Articles, Subject, AdmissionForm, OnlineApplication
 
 
 # Create your views here.
@@ -11,9 +15,11 @@ from .models import Class, GalleryCategory, Gallery, GamesCategory, Games, Trans
 def home_page(request):
     popular_class = Class.objects.all()[:3]
     testimonies = Testimony.objects.all()
+    articles = Articles.objects.all().order_by('-date_posted')
     context = {
         'popular_class': popular_class,
-        'testimonies': testimonies
+        'testimonies': testimonies,
+        'articles': articles,
     }
     return render(request, 'core/home.html', context)
 
@@ -116,7 +122,7 @@ def gallery(request):
 
 
 def articles(request):
-    articles = Articles.objects.all()
+    articles = Articles.objects.all().order_by('-date_posted')
     context = {
         'articles': articles,
     }
@@ -190,7 +196,23 @@ def remote(request):
 
 
 def admission(request):
+    form_file = AdmissionForm.objects.all().first()
+    form = OnlineApplicationForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = OnlineApplicationForm(request.POST)
     context = {
-
+        'form_file': form_file,
+        'form': form,
     }
     return render(request, 'core/admission.html', context)
+
+
+class CreateAdmissionView(CreateView):
+    model = OnlineApplication
+    form_class = OnlineApplicationForm
+    template_name = 'core/admission.html'
+    success_url = reverse_lazy('home')

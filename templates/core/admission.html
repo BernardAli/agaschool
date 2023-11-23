@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}
   Admission
@@ -43,7 +44,7 @@
             </p>
             <h1 class="mb-4">Admission in Progress</h1>
             <p>
-              We ae currently admitting students at all levels
+              We are currently admitting students at all levels
             </p>
             <div class="row pt-2 pb-4">
               <div class="col-6 col-md-4">
@@ -94,7 +95,7 @@
                 <i class="fa fa-check text-success mr-3"></i>Submit it to the school's secretary's office.
               </li>
             </ul>
-            <a href="" class="btn btn-primary mt-4 py-2 px-4">Application Form</a>
+            <a href="{{ form_file.form_file.url }}" target="_blank" class="btn btn-primary mt-4 py-2 px-4">Application Form</a>
           </div>
           <div class="col-lg-5">
             <div class="card border-0">
@@ -102,40 +103,9 @@
                 <h1 class="text-white m-0">Apply Now</h1>
               </div>
               <div class="card-body rounded-bottom bg-primary p-5">
-                <form>
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      class="form-control border-0 p-4"
-                      placeholder="Your Name"
-                      required="required"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="email"
-                      class="form-control border-0 p-4"
-                      placeholder="Your Email"
-                      required="required"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      class="form-control border-0 p-4"
-                      placeholder="Your Mobile Number"
-                      required="required"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                            type="date"
-                            name=""
-                            id=""
-                            class="form-control border-0 p-4"
-                      placeholder="Your Email"
-                      required="required">
-                  </div>
+                <form method="get">
+                  {% csrf_token %}
+                  {{form|crispy}}
                   <div>
                     <button
                       class="btn btn-secondary btn-block border-0 py-3"

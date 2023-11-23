@@ -209,3 +209,47 @@ class Articles(models.Model):
 
     def get_absolute_url(self):
         return reverse('article_detail', args=[str(self.id)])
+
+
+class Journal(models.Model):
+    title = models.CharField(max_length=255)
+    category = models.ForeignKey(ArticlesCategories, on_delete=models.CASCADE)
+    picture_1 = models.ImageField(default='', upload_to='blog')
+    blockquote = models.CharField(max_length=255, null=True, blank=True)
+    picture_2 = models.ImageField(upload_to='blog', null=True, blank=True)
+    picture_3 = models.ImageField(upload_to='blog', null=True, blank=True)
+    detail_1 = models.TextField(null=True, blank=True)
+    detail_2 = models.TextField(null=True, blank=True)
+    topic_3 = models.CharField(max_length=255, null=True, blank=True)
+    detail_3 = models.TextField(null=True, blank=True)
+    topic_4 = models.CharField(max_length=255, null=True, blank=True)
+    detail_4 = models.TextField(null=True, blank=True)
+    detail_5 = models.TextField(null=True, blank=True)
+    detail_6 = models.TextField(null=True, blank=True)
+    banner = models.BooleanField(default=False)
+    date_posted = models.DateTimeField(auto_now_add=True)
+    author = models.CharField(max_length=155)
+    author_pic = models.ImageField(upload_to='blog', default="default.jpg", null=True, blank=True)
+
+    # author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.title}"
+
+    def get_absolute_url(self):
+        return reverse('article_detail', args=[str(self.id)])
+
+
+class AdmissionForm(models.Model):
+    form_file = models.FileField(upload_to='admission_form')
+
+
+class OnlineApplication(models.Model):
+    full_name = models.CharField(max_length=125)
+    birth_date = models.DateField()
+    expected_class = models.ForeignKey(Class, on_delete=models.CASCADE)
+    phone_number = models.CharField(max_length=15)
+    current_academic_report = models.FileField()
+
+    def __str__(self):
+        return f"{self.full_name}"

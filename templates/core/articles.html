@@ -14,39 +14,46 @@
         class="d-flex flex-column align-items-center justify-content-center"
         style="min-height: 400px"
       >
-        <h3 class="display-3 font-weight-bold text-white">Our Articles</h3>
+        <h3 class="display-3 font-weight-bold text-white">Blog</h3>
         <div class="d-inline-flex text-white">
           <p class="m-0"><a class="text-white" href="{% url 'home' %}">Home</a></p>
           <p class="m-0 px-2">/</p>
-          <p class="m-0">Our Articles</p>
+          <p class="m-0">News Articles</p>
         </div>
       </div>
     </div>
 <!-- Header End -->
 
-
-<!-- Facilities Start -->
+    <!-- Blog Start -->
     <div class="container-fluid pt-5">
-      <div class="container pb-3">
-        <div class="row">
+      <div class="container">
+        <div class="text-center pb-2">
+          <p class="section-title px-5">
+            <span class="px-2">Our Blog</span>
+          </p>
+          <h1 class="mb-4">Our News Articles</h1>
+        </div>
+        <div class="row pb-3">
           {% for article in  articles %}
-          <div class="col-lg-4 col-md-6 pb-1">
-            <div
-              class="d-flex bg-light shadow-sm border-top rounded mb-4"
-              style="padding: 30px"
-            >
-              <div class="pl-4">
-                <h4>{{ article.title }}</h4>
-                <p class="m-0">
-                  {{ article.category }}
-                </p>
-                <p class="m-0">
+          <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow-sm mb-2">
+              <img class="card-img-top mb-2" src="{{ article.picture_1.url }}" alt="" />
+              <div class="card-body bg-light text-center p-4">
+                <h4 class="">{{ article.title }}</h4>
+                <div class="d-flex justify-content-center mb-3">
+                  <small class="mr-3"
+                    ><i class="fa fa-user text-primary"></i> {{ article.author }}</small
+                  >
+                  <small class="mr-3"
+                    ><i class="fa fa-folder text-primary"></i> {{ article.category }}</small
+                  >
+                </div>
+                <p>
                   {{ article.blockquote }}
                 </p>
-                <p class="m-0">
-                  {{ article.author }}
-                </p>
-                <a href="{% url 'article_details' article.id %}">View Details</a>
+                <a href="{% url 'article_details' article.id %}" class="btn btn-primary px-4 mx-auto my-2"
+                  >Read More</a
+                >
               </div>
             </div>
           </div>
@@ -56,6 +63,6 @@
         </div>
       </div>
     </div>
-    <!-- Facilities Start -->
+    <!-- Blog End -->
 
 {% endblock content %}

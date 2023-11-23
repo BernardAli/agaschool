@@ -14,7 +14,7 @@
         class="d-flex flex-column align-items-center justify-content-center"
         style="min-height: 400px"
       >
-        <h3 class="display-3 font-weight-bold text-white">Our Articles</h3>
+        <h3 class="display-3 font-weight-bold text-white">{{article.title}}</h3>
         <div class="d-inline-flex text-white">
           <p class="m-0"><a class="text-white" href="{% url 'home' %}">Home</a></p>
           <p class="m-0 px-2">/</p>
@@ -24,114 +24,165 @@
     </div>
 <!-- Header End -->
 
-
-<!-- ======= article Single Section ======= -->
-    <section id="article" class="article">
+  <!-- ======= Blog Details Section ======= -->
+    <section id="blog" class="blog">
       <div class="container" data-aos="fade-up">
 
-        <div class="row">
+        <div class="row g-5">
 
-          <div class="col-lg-8 entries">
+          <div class="col-lg-8">
 
-            <article class="entry entry-single">
+            <article class="blog-details">
 
-              <div class="entry-img">
+              <div class="post-img">
                 <img src="{{article.picture_1.url}}" alt="" class="img-fluid">
               </div>
 
-              <h2 class="entry-title">
-                <a href="article-single.html">{{article.title}}</a>
-              </h2>
+              <h2 class="title">{{article.title}}</h2>
 
-              <div class="entry-meta">
+              <div class="meta-top">
                 <ul>
-                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="article-single.html">{{article.author}}</a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="article-single.html"><time datetime="2020-01-01">{{article.date_posted}}</time></a></li>
+                  <li class="d-flex align-items-center"><i class="fa fa-user text-primary mr-3"></i> {{article.author}}</li>
+                  <li class="d-flex align-items-center"><i class="fa fa-clock text-primary mr-3"></i> <time datetime="{{article.date_posted}}">{{article.date_posted}}</time></li>
                 </ul>
-              </div>
+              </div><!-- End meta top -->
 
-              <div class="entry-content">
-                <p>{{article.detail_1}}</p>
+              <div class="content">
+                <p>
+                  {{article.detail_1}}
+                </p>
 
                 <blockquote>
-                  <p>{{article.blockquote}}</p>
+                  <p>
+                    {{article.blockquote}}
+                  </p>
                 </blockquote>
 
                 {% if article.detail_2 %}
-                <p>{{article.detail_2}}</p>
-                {% endif %}
-
-                {% if article.topic_3 %}
-                  <h3>{{article.topic_3}}</h3>
+                <p>
+                  {{article.detail_2}}
+                </p>
                 {% endif %}
 
                 {% if article.detail_3 %}
-                <p>{{article.detail_3}}</p>
-                {% endif %}
-
-                {% if article.picture_2.url %}
-                <img src="{{article.picture_2.url}}" class="img-fluid" alt="">
+                <p>
+                  {{article.detail_3}}
+                </p>
                 {% endif %}
 
                 {% if article.topic_4 %}
-                  <h3>{{article.topic_4}}</h3>
+                <h3>{{article.detail_4}}</h3>
                 {% endif %}
 
                 {% if article.detail_4 %}
-                <p>{{article.detail_4}}</p>
+                <p>
+                  {{article.detail_4}}
+                </p>
                 {% endif %}
 
-                {% if article.detail_5 %}
-                <p>{{article.detail_5}}</p>
+                {% if article.picture_2 %}
+                <img src="{{article.picture_2.url}}" class="img-fluid" alt="">
                 {% endif %}
 
-                {% if article.detail_6 %}
-                <p>{{article.detail_6}}</p>
-                {% endif %}
+              </div><!-- End post content -->
+
+              <div class="meta-bottom">
+                <i class="bi bi-folder"></i>
+                <ul class="cats">
+                  <li><a>{{article.category}}</a></li>
+                </ul>
+              </div><!-- End meta bottom -->
+
+            </article><!-- End blog post -->
+
+            <div class="comments">
+
+              <h4 class="comments-count">8 Comments</h4>
+
+              <div id="comment-1" class="comment">
+                <div class="d-flex">
+                  <div class="comment-img"><img src="assets/img/blog/comments-1.jpg" alt=""></div>
+                  <div>
+                    <h5><a href="">Georgia Reader</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
+                    <time datetime="2020-01-01">01 Jan,2022</time>
+                    <p>
+                      Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et. Est ad aut sapiente quis molestiae est qui cum soluta.
+                      Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui facilis et.
+                    </p>
+                  </div>
+                </div>
+              </div><!-- End comment #1 -->
+
+              <div class="reply-form">
+
+                <h4>Leave a Reply</h4>
+                <p>Your email address will not be published. Required fields are marked * </p>
+                <form action="">
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <input name="name" type="text" class="form-control" placeholder="Your Name*">
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <input name="email" type="text" class="form-control" placeholder="Your Email*">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col form-group">
+                      <input name="website" type="text" class="form-control" placeholder="Your Website">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col form-group">
+                      <textarea name="comment" class="form-control" placeholder="Your Comment*"></textarea>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Post Comment</button>
+
+                </form>
 
               </div>
 
-            </article><!-- End article entry -->
+            </div><!-- End blog comments -->
 
-            <div class="article-author d-flex align-items-center">
-              <div>
-                <h4>Author: {{article.author}}</h4>
-              </div>
-            </div><!-- End article author bio -->
-
-          </div><!-- End article entries list -->
+          </div>
 
           <div class="col-lg-4">
 
             <div class="sidebar">
 
-              <h3 class="sidebar-title">Search</h3>
               <div class="sidebar-item search-form">
-                <form action="">
+                <h3 class="sidebar-title">Search</h3>
+                <form action="" class="mt-3">
                   <input type="text">
                   <button type="submit"><i class="bi bi-search"></i></button>
                 </form>
               </div><!-- End sidebar search formn-->
 
-              <h3 class="sidebar-title">Recent Posts</h3>
               <div class="sidebar-item recent-posts">
-                {% for article in recent_article %}
-                <div class="post-item clearfix">
-                  <img src="{{article.picture_1.url}}" alt="">
-                  <h4><a href="{% url 'article_details' article.id %}">{{article.title}}</a></h4>
-                  <time datetime="{{article.date_posted}}">{{article.date_posted}}</time>
+                <h3 class="sidebar-title">Recent Posts</h3>
+
+                <div class="mt-3">
+                  {% for article in recent_article %}
+                  <div class="post-item mt-3">
+                    <img src="{{article.picture_1.url}}" alt="" class="flex-shrink-0">
+                    <div>
+                      <h4><a href="{% url 'article_details' article.id %}">{{article.title}}</a></h4>
+                      <time datetime="2020-01-01">{{article.date_posted}}</time>
+                    </div>
+                  </div><!-- End recent post item-->
+                  {% endfor %}
+
                 </div>
-                {% endfor %}
 
-              </div><!-- End sidebar recent posts-->
+              </div>
+              <!-- End sidebar recent posts-->
 
-            </div><!-- End sidebar -->
+            </div><!-- End Blog Sidebar -->
 
-          </div><!-- End article sidebar -->
-
+          </div>
         </div>
 
       </div>
-    </section><!-- End article Single Section -->
+    </section><!-- End Blog Details Section -->
 
 {% endblock content %}
