@@ -104,7 +104,6 @@
   const portfolioLightbox = GLightbox({
     selector: '.portfolio-lightbox'
   });
-
   /**
    * Portfolio details slider
    */
@@ -123,4 +122,29 @@
   });
     
 })(jQuery);
+
+(function() {
+  "use strict";
+
+  /**
+   * Easy selector helper function
+   */
+  const select = (el, all = false) => {
+    el = el.trim()
+    if (all) {
+      return [...document.querySelectorAll(el)]
+    } else {
+      return document.querySelector(el)
+    }
+  }
+
+     /**
+   * Initiate Datatables
+   */
+  const datatables = select('.datatable', true)
+    datatables.forEach(datatable => {
+    new simpleDatatables.DataTable(datatable);
+  });
+  console.log('Hello');
+})()
 

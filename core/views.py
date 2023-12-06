@@ -195,6 +195,31 @@ def remote(request):
     return render(request, 'core/remote.html', context)
 
 
+def library(request):
+    context = {
+
+    }
+    return render(request, 'core/library.html', context)
+
+
+def fees(request):
+    context = {
+    }
+    return render(request, 'core/fees.html', context)
+
+
+def awards(request):
+    context = {
+    }
+    return render(request, 'core/awards.html', context)
+
+
+def counselors(request):
+    context = {
+    }
+    return render(request, 'core/counselors.html', context)
+
+
 def admission(request):
     form_file = AdmissionForm.objects.all().first()
     form = OnlineApplicationForm(request.POST)

@@ -111,19 +111,23 @@
 
             <div class="row pt-2 pb-4">
               <div class="col-12">
-                <table class="table">
+                <table class="table table-hover table-bordered table-striped datatable">
+                  <thead>
                   <tr>
                     <th>Destination</th>
                     <th>Pickup Time</th>
                     <th>Dropoff Time</th>
                   </tr>
-                  {% for route in routes %}
+                  </thead>
+                  <tbody>
+                    {% for route in routes %}
                     <tr>
                       <td>{{route.destination}}</td>
                       <td>{{route.pickup_time}}</td>
                       <td>{{route.drop_time}}</td>
                     </tr>
                   {% endfor %}
+                  </tbody>
                 </table>
               </div>
             </div>

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Fees & Charges
+{% endblock title %}
+
+
+{% block content %}
+
+<!-- Header Start -->
+    <div class="container-fluid bg-primary mb-5">
+      <div
+        class="d-flex flex-column align-items-center justify-content-center"
+        style="min-height: 400px"
+      >
+        <h3 class="display-3 font-weight-bold text-white">Fees & Charges</h3>
+        <div class="d-inline-flex text-white">
+          <p class="m-0"><a class="text-white" href="{% url 'home' %}">Home</a></p>
+          <p class="m-0 px-2">/</p>
+          <p class="m-0">Fees & Charges</p>
+        </div>
+      </div>
+    </div>
+<!-- Header End -->
+
+
+<!-- About Start -->
+    <div class="container-fluid py-5">
+      <div class="container">
+        <div>
+            <p class="section-title pr-5">
+              <span class="pr-2">Fees & Charges</span>
+            </p>
+            <h1 class="mb-4">Fees & Charges</h1>
+            <p>
+              Below are our fees and charges
+            </p>
+            <table class="table table-hover table-bordered table-striped datatable">
+                <thead>
+                    <tr>
+                        <td>Level</td>
+                        <td>Class</td>
+                        <td>School Fees / Term (GHS)</td>
+                        <td>Canteen / Day (GHS)</td>
+                        <td>Uniform (GHS)</td>
+                        <td>Others / Term (GHS)</td>
+                    </tr>
+                </thead>
+                <tbody class="text text-center">
+                    <tr>
+                        <th>Nursery</th>
+                        <th>KG 1</th>
+                        <th>520</th>
+                        <th>10</th>
+                        <th>210</th>
+                        <th>0</th>
+                    </tr>
+                    <tr>
+                        <th>Nursery</th>
+                        <th>KG 1</th>
+                        <th>520</th>
+                        <th>10</th>
+                        <th>210</th>
+                        <th>0</th>
+                    </tr>
+                    <tr>
+                        <th>Nursery</th>
+                        <th>KG 1</th>
+                        <th>520</th>
+                        <th>10</th>
+                        <th>210</th>
+                        <th>0</th>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
+    <!-- About End -->
+
+{% endblock content %}

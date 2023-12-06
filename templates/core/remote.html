@@ -14,7 +14,7 @@
         class="d-flex flex-column align-items-center justify-content-center"
         style="min-height: 400px"
       >
-        <h3 class="display-3 font-weight-bold text-white">AGA Remote Learning</h3>
+        <h3 class="display-3 font-weight-bold text-white">Remote Learning</h3>
         <div class="d-inline-flex text-white">
           <p class="m-0"><a class="text-white" href="{% url 'home' %}">Home</a></p>
           <p class="m-0 px-2">/</p>
@@ -23,5 +23,74 @@
       </div>
     </div>
 <!-- Header End -->
+
+<!-- About Start -->
+    <div class="container-fluid py-5">
+      <div class="container">
+        <div>
+            <p class="section-title pr-5">
+              <span class="pr-2">Remote Learning</span>
+            </p>
+            <h1 class="mb-4">Remote Learning</h1>
+            <p>
+              Continually check the site for materials.
+            </p>
+            <div class="details order-2 order-lg-1">
+                    <h3>Assignments</h3>
+                    <p class="fst-italic">Take notes of the respective deadlines.</p>
+                    <table class="table table-bordered table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Uploaded On</th>
+                          <th>Question</th>
+                          <th>Submission Date</th>
+                          <th>Total Score</th>
+                          <th>Teacher Comments</th>
+                          <th>Results</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for assignment in topic.assignment_set.all %}
+                        <tr>
+                          <td>{{ assignment.assignment_code }}</td>
+                          <td>{{ assignment.date_created|timesince }} ago</td>
+                          <td><a href="{{ assignment.assignment_file.url }}">Download Question</a></td>
+                          <td>{{ assignment.submission_date }}</td>
+                          <td>{{ assignment.total_score }}</td>
+                          <td>
+                            {% if assignment.teacher_comments %}
+                            {{ assignment.teacher_comments }}</td>
+                            {% else %}
+                            -
+                            {% endif %}
+                          <td>
+                            {% if assignment.results %}
+                            <a href="{{ assignment.results.url }}">Download results</a>
+                            {% else %}
+                            -
+                            {% endif %}
+                          </td>
+                        </tr>
+                        {% empty %}
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                    <br>
+                    <form action="" method="post" class="form">
+                      {% csrf_token %}
+                      <h5>Upload your assignment:</h5>
+                      <p>Make your you add the correct ID</p>
+                      <input type="text" name="assignment_code" id="assignment_code" placeholder="Assignment ID" class="form-control">
+                      <br>
+                      <input type="file" name="answer_file" id="answer_file" class="form-control">
+                      <br>
+                      <input type="submit" value="Submit Assignment" class="btn btn-primary">
+                    </form>
+                </div>
+          </div>
+      </div>
+    </div>
+<!-- About End -->
 
 {% endblock content %}

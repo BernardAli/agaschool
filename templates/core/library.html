@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  About Us
+{% endblock title %}
+
+
+{% block content %}
+
+<!-- Header Start -->
+    <div class="container-fluid bg-primary mb-5">
+      <div
+        class="d-flex flex-column align-items-center justify-content-center"
+        style="min-height: 400px"
+      >
+        <h3 class="display-3 font-weight-bold text-white">Online Library</h3>
+        <div class="d-inline-flex text-white">
+          <p class="m-0"><a class="text-white" href="{% url 'home' %}">Home</a></p>
+          <p class="m-0 px-2">/</p>
+          <p class="m-0">Library</p>
+        </div>
+      </div>
+    </div>
+<!-- Header End -->
+
+
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+      <div class="container">
+        <div>
+            <p class="section-title pr-5">
+              <span class="pr-2">Library</span>
+            </p>
+            <h1 class="mb-4">Online Library</h1>
+            <p>
+              Welcome to our library, where you can read books.
+            </p>
+            <table class="table table-hover table-bordered table-striped datatable">
+                <thead>
+                    <tr>
+                        <td>Type</td>
+                        <td>Author</td>
+                        <td>Title</td>
+                        <td>Publisher</td>
+                        <td>Year</td>
+                        <td>Read Now</td>
+                    </tr>
+                </thead>
+                <tbody class="text text-center">
+                    <tr>
+                        <th>Text Book</th>
+                        <th>Ishmael Adams</th>
+                        <th>Integrated Science</th>
+                        <th>A+ Series</th>
+                        <th>2022</th>
+                        <th><a href=""><h4 class="fa fa-book text-primary"></h4></a></th>
+                    </tr>
+                    <tr>
+                        <th>Text Book</th>
+                        <th>Ishmael Adams</th>
+                        <th>Integrated Science</th>
+                        <th>A+ Series</th>
+                        <th>2020</th>
+                        <th><a href=""><h4 class="fa fa-book text-primary"></h4></a></th>
+                    </tr>
+                    <tr>
+                        <th>Text Book</th>
+                        <th>Ishmael Adams</th>
+                        <th>Integrated Science</th>
+                        <th>A+ Series</th>
+                        <th>2016</th>
+                        <th><a href=""><h4 class="fa fa-book text-primary"></h4></a></th>
+                    </tr>
+                    <tr>
+                        <th>Text Book</th>
+                        <th>Ishmael Adams</th>
+                        <th>Integrated Science</th>
+                        <th>A+ Series</th>
+                        <th>2019</th>
+                        <th><a href=""><h4 class="fa fa-book text-primary"></h4></a></th>
+                    </tr>
+                    <tr>
+                        <th>Text Book</th>
+                        <th>Ishmael Adams</th>
+                        <th>Integrated Science</th>
+                        <th>A+ Series</th>
+                        <th>2023</th>
+                        <th><a href=""><h4 class="fa fa-book text-primary"></h4></a></th>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
+    <!-- About End -->
+
+{% endblock content %}

@@ -37,6 +37,7 @@
     <!-- Libraries Stylesheet -->
     <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet" />
     <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'vendor/simple-datatables/style.css' %}" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
@@ -83,6 +84,7 @@
                 <a href="{% url 'history' %}" class="dropdown-item">History</a>
                 <a href="{% url 'management' %}" class="dropdown-item">Management</a>
                 <a href="{% url 'teachers' %}" class="dropdown-item">Teachers</a>
+                <a href="{% url 'counselors' %}" class="dropdown-item">Counselors</a>
               </div>
             </div>
             <div class="nav-item dropdown">
@@ -95,7 +97,7 @@
               <div class="dropdown-menu rounded-0 m-0">
                 <a href="{% url 'classes' %}" class="dropdown-item">Classes</a>
                 <a href="{% url 'academics' %}" class="dropdown-item">Subjects</a>
-                <a href="{% url 'academics' %}" class="dropdown-item">Online Library</a>
+                <a href="{% url 'library' %}" class="dropdown-item">Online Library</a>
               </div>
             </div>
             <div class="nav-item dropdown">
@@ -108,6 +110,7 @@
               <div class="dropdown-menu rounded-0 m-0">
                 <a href="{% url 'admission' %}" class="dropdown-item">Apply Online</a>
                 <a href="{% url 'placement_test' %}" class="dropdown-item">Placement Test</a>
+                <a href="{% url 'fees' %}" class="dropdown-item">Fees and Charges</a>
               </div>
             </div>
             <div class="nav-item dropdown">
@@ -145,6 +148,7 @@
                 <a href="{% url 'careers' %}" class="dropdown-item">We are Hiring!</a>
                 <a href="{% url 'store' %}" class="dropdown-item">Stationery Store</a>
                 <a href="{% url 'transportation' %}" class="dropdown-item">Our Transportation</a>
+                <a href="{% url 'awards' %}" class="dropdown-item">Awards & Achievements</a>
               </div>
             </div>
             <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
@@ -182,6 +186,12 @@
             stet diam duo eos rebum ipsum diam ipsum elitr.
           </p>
           <div class="d-flex justify-content-start mt-4">
+            <a
+              class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
+              style="width: 38px; height: 38px"
+              href="#"
+              ><i class="fab fa-whatsapp"></i
+            ></a>
             <a
               class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
               style="width: 38px; height: 38px"
@@ -294,7 +304,7 @@
       >
         <p class="m-0 text-center text-white">
           &copy;
-          <a class="text-primary font-weight-bold" href="#">Your Site Name</a>.
+          <a class="text-primary font-weight-bold" href="#">Allgift Technologies LTD</a>.
           All Rights Reserved.
 
           <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
@@ -302,8 +312,8 @@
           <a class="text-primary font-weight-bold" href="https://htmlcodex.com"
             >HTML Codex</a
           >
-          <br />Distributed By:
-          <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+<!--          <br />Distributed By:-->
+<!--          <a href="https://themewagon.com" target="_blank">ThemeWagon</a>-->
         </p>
       </div>
     </div>
@@ -329,6 +339,7 @@
     <!-- Contact Javascript File -->
     <script src="{% static 'mail/jqBootstrapValidation.min.js' %}"></script>
     <script src="{% static 'mail/contact.js' %}"></script>
+    <script src="{% static 'vendor/simple-datatables/simple-datatables.js' %}"></script>
 
     <!-- Template Javascript -->
     <script src="{% static 'js/main.js' %}"></script>
