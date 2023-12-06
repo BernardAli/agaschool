@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Register An Account
+Login Now
 {% endblock %}
 
 {% block content %}
@@ -11,11 +11,11 @@ Register An Account
         class="d-flex flex-column align-items-center justify-content-center"
         style="min-height: 400px"
       >
-        <h3 class="display-3 font-weight-bold text-white">Register</h3>
+        <h3 class="display-3 font-weight-bold text-white">Login</h3>
         <div class="d-inline-flex text-white">
           <p class="m-0"><a class="text-white" href="{% url 'home' %}">Home</a></p>
           <p class="m-0 px-2">/</p>
-          <p class="m-0">Register Now</p>
+          <p class="m-0">Login Now</p>
         </div>
       </div>
     </div>
@@ -27,27 +27,21 @@ Register An Account
         <div class="row align-items-center">
           <div class="col-lg-7 mb-5 mb-lg-0">
             <p class="section-title pr-5">
-              <span class="pr-2">Registration Manual</span>
+              <span class="pr-2">Login Manual</span>
             </p>
-            <h1 class="mb-4">Register</h1>
+            <h1 class="mb-4">Login</h1>
             <p>
-              Invidunt lorem justo sanctus clita. Erat lorem labore ea, justo
-              dolor lorem ipsum ut sed eos, ipsum et dolor kasd sit ea justo.
-              Erat justo sed sed diam. Ea et erat ut sed diam sea ipsum est
-              dolor
+              Our system automatically determines whether you're a student/parent, teacher or part of management.
             </p>
             <ul class="list-inline m-0">
               <li class="py-2">
-                <i class="fa fa-check text-success mr-3"></i>Labore eos amet
-                dolor amet diam
+                <i class="fa fa-check text-success mr-3"></i>Login with the credentials given to you.
               </li>
               <li class="py-2">
-                <i class="fa fa-check text-success mr-3"></i>Etsea et sit dolor
-                amet ipsum
+                <i class="fa fa-check text-success mr-3"></i>Change password to your desired secured password.
               </li>
               <li class="py-2">
-                <i class="fa fa-check text-success mr-3"></i>Diam dolor diam
-                elitripsum vero.
+                <i class="fa fa-check text-success mr-3"></i>Contact us in case of any suspicious activity on your account.
               </li>
             </ul>
           </div>
@@ -86,6 +80,8 @@ Register An Account
                     </button>
                   </div>
                 </form>
+                <br>
+                <p class="btn bg-warning"><a href="{% url 'password_reset' %}">forgot password?</a></p>
               </div>
             </div>
           </div>
