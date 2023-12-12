@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'core',
     'authy',
+    'accounts',
     
     # Third Party Apps
     'crispy_forms',

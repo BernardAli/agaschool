@@ -87,3 +87,33 @@ def login_page(request):
     }
 
     return render(request, 'authy/login.html', context)
+
+
+@login_required
+def profile(request, username):
+    profile = get_object_or_404(User, username=username)
+
+    context = {
+        'profile': profile,
+    }
+
+    return render(request, 'authy/profile.html', context)
+
+
+@login_required(login_url='login')
+def update_user(request, username):
+    user = get_object_or_404(User, username=username)
+    form = UserForm(instance=user)
+
+    if request.method == 'POST':
+        form = UserForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Your profile has been updated!')
+            return redirect(f'profile', user.username)
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'authy/edit_profile.html', context)

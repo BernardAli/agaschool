@@ -157,12 +157,12 @@
 <!--            <a href="{% url 'logout' %}" class="btn btn-primary px-4">Logout</a>-->
           <div class="nav-item dropdown">
               <a
-                href="#"
                 class="nav-link dropdown-toggle"
                 data-toggle="dropdown"
                 >{{user.username}}</a
               >
               <div class="dropdown-menu rounded-0 m-0">
+                <a href="{% url 'profile' request.user.username %}" class="dropdown-item">Profile</a>
                 <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
               </div>
             </div>
@@ -276,6 +276,9 @@
             >
             <a class="text-white mb-2" href="{% url 'register' %}"
               ><i class="fa fa-angle-right mr-2"></i>Register</a
+            >
+            <a class="text-white mb-2" href="{% url 'account_home' %}"
+              ><i class="fa fa-angle-right mr-2"></i>Accounts</a
             >
           </div>
         </div>

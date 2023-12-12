@@ -23,7 +23,7 @@ MARITAL_STATUS = (
 )
 
 GENDER_CHOICE = (
-    ('Male', 'Female'),
+    ('Male', 'Male'),
     ('Female', 'Female'),
 )
 
@@ -50,6 +50,7 @@ REGION_CHOICE = (
 class User(AbstractUser):
     full_name = models.CharField(max_length=200, null=True)
     email = models.EmailField(unique=True, null=True)
+    phone = models.CharField(max_length=20)
     avatar = models.ImageField(null=True, default="default.jpg")
     background_img = models.ImageField(default='home-bg.jpg', upload_to='background_pics')
     gender = models.CharField(max_length=100, choices=GENDER_CHOICE, null=True, blank=True)
@@ -60,10 +61,7 @@ class User(AbstractUser):
     nationality = models.CharField(max_length=100, default='Ghanaian')
 
     created = models.DateField(auto_now_add=True)
-    registration_fee = models.PositiveIntegerField(default=0.0, blank=True, null=True)
     is_blocked = models.BooleanField(default=False)
-
-    phone = models.CharField(max_length=20)
     facebook_url = models.URLField(max_length=255, blank=True, null=True)
     twitter_url = models.URLField(max_length=255, blank=True, null=True)
     instagram_url = models.URLField(max_length=255, blank=True, null=True)

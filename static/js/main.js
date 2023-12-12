@@ -145,6 +145,6 @@
     datatables.forEach(datatable => {
     new simpleDatatables.DataTable(datatable);
   });
-  console.log('Hello');
+//   console.log('Hello');
 })()
 

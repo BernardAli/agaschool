@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Edit Profile
+{% endblock title %}
+
+
+{% block content %}
+
+<!-- Header Start -->
+    <div class="container-fluid bg-primary mb-5">
+      <div
+        class="d-flex flex-column align-items-center justify-content-center"
+        style="min-height: 400px"
+      >
+        <h3 class="display-3 font-weight-bold text-white">Account Settings</h3>
+        <div class="d-inline-flex text-white">
+          <p class="m-0"><a class="text-white" href="{% url 'home' %}">Home</a></p>
+          <p class="m-0 px-2">/</p>
+          <p class="m-0">Edit Profile</p>
+        </div>
+      </div>
+    </div>
+<!-- Header End -->
+
+
+    <!-- Registration Start -->
+    <div class="container-fluid">
+      <div class="container">
+        <div class="card border-0">
+              <div class="card-header bg-secondary text-center p-4">
+                <h1 class="text-white m-0">Edit Profile</h1>
+              </div>
+              <div class="card-body rounded-bottom bg-primary p-5">
+                <form method="post">
+                  {% csrf_token %}
+                  {{form|crispy}}
+                  <div>
+                      <input type="submit" class="btn btn-secondary btn-block border-0 py-3" value="Apply Changes">
+                  </div>
+                </form>
+              </div>
+            </div>
+      </div>
+    </div>
+    <!-- Registration End -->
+
+{% endblock content %}

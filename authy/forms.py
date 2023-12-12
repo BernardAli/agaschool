@@ -19,8 +19,8 @@ class MyUserCreationForm(UserCreationForm):
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ['full_name', "phone", "avatar", "region",  "facebook_url", "twitter_url", "instagram_url",
-                  "linkedin_url", "website_url", "background_img"]
+        fields = ['full_name', "phone", 'email', "avatar", 'residence', 'GPS_Address', "region",  "facebook_url", "twitter_url", "instagram_url",
+                  "linkedin_url", "website_url"]
         widgets = {
             "user_type": forms.Select(attrs={'onchange': "update();"}),
         }
