@@ -22,7 +22,8 @@
             ipsum at ipsum nonumy amet. Clita lorem dolore sed stet et est justo
             dolore.
           </p>
-          <a href="" class="btn btn-secondary mt-1 py-3 px-5">Learn More</a>
+          <a href="" class="btn btn-secondary mt-1 py-3 px-5">View Compound</a>
+          <a href="" class="btn btn-secondary mt-1 py-3 px-5">Online Library</a>
         </div>
         <div class="col-lg-6 text-center text-lg-right">
           <img class="img-fluid mt-5" src="{% static 'img/header.png' %}" alt="" />
@@ -229,18 +230,13 @@
           <div class="tab-pane active show" id="tab-1">
             <div class="order-2 order-lg-1" data-aos="fade-up" data-aos-delay="100">
                 <ul class="list-inline m-0">
-                  <li class="py-2 border-top border-bottom">
-                    <i class="fa fa-check text-primary mr-3"></i>Labore eos amet
-                    dolor amet diam
-                  </li>
-                  <li class="py-2 border-bottom">
-                    <i class="fa fa-check text-primary mr-3"></i>Etsea et sit
-                    dolor amet ipsum
-                  </li>
-                  <li class="py-2 border-bottom">
-                    <i class="fa fa-check text-primary mr-3"></i>Diam dolor diam
-                    elitripsum vero.
-                  </li>
+                    {% for announcement in announcements%}
+                      <li class="py-3 border-top border-bottom">
+                        <i class="fa fa-check text-primary mr-3"></i>{{announcement.event}}
+                      </li>
+                    {% empty %}
+                        <p>No Announcement Added yet</p>
+                    {% endfor %}
                 </ul>
               </div>
           </div><!-- End Tab Content 1 -->
@@ -250,26 +246,16 @@
                 <thead>
                     <tr>
                         <td>Date</td>
-                        <td>Event</td>
+                        <td>Activity</td>
                     </tr>
                 </thead>
                 <tbody class="text text-center">
+                {% for activity in activities %}
                     <tr>
-                        <th>Text Book</th>
-                        <th>Ishmael Adams</th>
+                        <th>{{activity.date}}</th>
+                        <th>{{activity.activity}}</th>
                     </tr>
-                      <tr>
-                        <th>Text Book</th>
-                        <th>Ishmael Adams</th>
-                    </tr>
-                      <tr>
-                        <th>Text Book</th>
-                        <th>Ishmael Adams</th>
-                    </tr>
-                      <tr>
-                        <th>Text Book</th>
-                        <th>Ishmael Adams</th>
-                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
           </div><!-- End Tab Content 2 -->
@@ -278,117 +264,44 @@
                 <table class="table table-hover table-bordered table-striped datatable">
                 <thead>
                     <tr>
-                        <td>Type</td>
-                        <td>Author</td>
-                        <td>Title</td>
-                        <td>Publisher</td>
-                        <td>Year</td>
-                        <td>Read Now</td>
+                        <td>Level</td>
+                        <td>Class</td>
+                        <td>School Fees / Term (GHS)</td>
                     </tr>
                 </thead>
                 <tbody class="text text-center">
+                {% for tuition_fee in  tuition_fees %}
                     <tr>
-                        <th>Text Book</th>
-                        <th>Ishmael Adams</th>
-                        <th>Integrated Science</th>
-                        <th>A+ Series</th>
-                        <th>2022</th>
-                        <th><a href=""><h4 class="fa fa-book text-primary"></h4></a></th>
+                        <th>{{tuition_fee.level}}</th>
+                        <th>{{tuition_fee.name}}</th>
+                        <th>{{tuition_fee.tuition_fee}}</th>
                     </tr>
-                    <tr>
-                        <th>Text Book</th>
-                        <th>Ishmael Adams</th>
-                        <th>Integrated Science</th>
-                        <th>A+ Series</th>
-                        <th>2020</th>
-                        <th><a href=""><h4 class="fa fa-book text-primary"></h4></a></th>
-                    </tr>
-                    <tr>
-                        <th>Text Book</th>
-                        <th>Ishmael Adams</th>
-                        <th>Integrated Science</th>
-                        <th>A+ Series</th>
-                        <th>2016</th>
-                        <th><a href=""><h4 class="fa fa-book text-primary"></h4></a></th>
-                    </tr>
-                    <tr>
-                        <th>Text Book</th>
-                        <th>Ishmael Adams</th>
-                        <th>Integrated Science</th>
-                        <th>A+ Series</th>
-                        <th>2019</th>
-                        <th><a href=""><h4 class="fa fa-book text-primary"></h4></a></th>
-                    </tr>
-                    <tr>
-                        <th>Text Book</th>
-                        <th>Ishmael Adams</th>
-                        <th>Integrated Science</th>
-                        <th>A+ Series</th>
-                        <th>2023</th>
-                        <th><a href=""><h4 class="fa fa-book text-primary"></h4></a></th>
-                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
           </div><!-- End Tab Content 3 -->
 
           <div class="tab-pane" id="tab-4">
             <!-- F.A.Q List 1-->
-            <div class="accordion accordion-flush" id="faqlist1">
+            {% for faq in faqs %}
+            <div class="accordion accordion-flush" id="faqlist{{faq.id}}">
                 <div class="accordion-item">
-                <h2 class="accordion-header">
+                <h2 class="accordion-header faq">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-{{faq.id}}">
-                    Question
+                    {{faq.question}}
                   </button>
                 </h2>
                 <div id="faq-content-{{faq.id}}" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
                   <div class="accordion-body">
-                    Answer
+                    {{faq.answer}}
                   </div>
                 </div>
               </div>
             </div>
-            <div class="accordion accordion-flush" id="faqlist1">
-                <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-{{faq.id}}">
-                    Question
-                  </button>
-                </h2>
-                <div id="faq-content-{{faq.id}}" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
-                  <div class="accordion-body">
-                    Answer
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="accordion accordion-flush" id="faqlist1">
-                <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-{{faq.id}}">
-                    Question
-                  </button>
-                </h2>
-                <div id="faq-content-{{faq.id}}" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
-                  <div class="accordion-body">
-                    Answer
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="accordion accordion-flush" id="faqlist1">
-                <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-{{faq.id}}">
-                    Question
-                  </button>
-                </h2>
-                <div id="faq-content-{{faq.id}}" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
-                  <div class="accordion-body">
-                    Answer
-                  </div>
-                </div>
-              </div>
-            </div>
+            <hr>
+            {% empty %}
+            <p>No FAQ added</p>
+            {% endfor %}
           </div><!-- End Tab Content 3 -->
 
         </div>
@@ -443,8 +356,11 @@
                 <i class="fa fa-check text-success mr-3"></i>Diam dolor diam
                 elitripsum vero.
               </li>
+              <li class="py-2">
+                <i class="fa fa-check text-success mr-3"></i>Diam dolor diam
+                elitripsum vero.
+              </li>
             </ul>
-            <a href="" class="btn btn-primary mt-4 py-2 px-4">Book Now</a>
           </div>
           <div class="col-lg-5">
             <div class="card border-0">
@@ -452,18 +368,21 @@
                 <h1 class="text-white m-0">Schedule a Visit</h1>
               </div>
               <div class="card-body rounded-bottom bg-primary p-5">
-                <form>
+                <form action="{% url 'schedule_visit' %}" method="post">
+                  {% csrf_token %}
                   <div class="form-group">
                     <input
                       type="text"
                       class="form-control border-0 p-4"
-                      placeholder="Your Name"
+                      placeholder="Your Full Name"
                       required="required"
+                      name="name"
                     />
                   </div>
                   <div class="form-group">
                     <input
                       type="email"
+                      name="email"
                       class="form-control border-0 p-4"
                       placeholder="Your Email"
                       required="required"
@@ -472,6 +391,7 @@
                   <div class="form-group">
                     <input
                       type="text"
+                      name="phone_number"
                       class="form-control border-0 p-4"
                       placeholder="Your Mobile Number"
                       required="required"
@@ -480,10 +400,18 @@
                   <div class="form-group">
                     <input
                             type="date"
-                            name=""
-                            id=""
+                            name="date"
+                            id="date"
                             class="form-control border-0 p-4"
-                      placeholder="Your Email"
+                      required="required">
+                  </div>
+                  <div class="form-group">
+                    <input
+                            type="time"
+                            name="time"
+                            id="time"
+                            min="09:00" max="15:00"
+                            class="form-control border-0 p-4"
                       required="required">
                   </div>
                   <div>
@@ -538,7 +466,7 @@
         </div>
         {% if user.is_authenticated %}
           <div style="text-align:center;">
-            <a href="{% url 'create_testimony' %}">Add a testimony</a>
+            <a href="{% url 'create_testimony' %}" class="btn btn-primary mt-4 py-2 px-4">Add a testimony</a>
           </div>
         {% endif %}
       </div>

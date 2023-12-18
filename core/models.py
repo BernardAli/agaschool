@@ -253,3 +253,88 @@ class OnlineApplication(models.Model):
 
     def __str__(self):
         return f"{self.full_name}"
+
+
+class Calendar(models.Model):
+    date = models.DateField()
+    activity = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.activity
+
+
+class Announcement(models.Model):
+    event = models.TextField()
+
+    def __str__(self):
+        return self.event
+
+
+class OtherFee(models.Model):
+    level = models.CharField(max_length=15, choices=LEVEL_CHOICES)
+    admission = models.IntegerField()
+    canteen = models.IntegerField()
+    uniform = models.IntegerField()
+    others = models.IntegerField()
+
+    def __str__(self):
+        return self.level
+
+
+BOOKS_CHOICES = (
+    ('Text Book', 'Text Book'),
+    ('Novel', 'Novel'),
+    ('Biography', 'Biography'),
+    ('Others', 'Others'),
+)
+
+
+class Library(models.Model):
+    type = models.CharField(max_length=255, choices=BOOKS_CHOICES)
+    author = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
+    publisher = models.CharField(max_length=255, blank=True, null=True)
+    year = models.IntegerField(blank=True, null=True)
+    file = models.FileField()
+
+    def __str__(self):
+        return self.title
+
+
+class FAQ(models.Model):
+    question = models.CharField(max_length=255)
+    answer = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.question
+
+
+class ScheduleVisit(models.Model):
+    name = models.CharField(max_length=125)
+    email = models.EmailField(blank=True, null=True)
+    phone_number = models.CharField(max_length=125)
+    date = models.DateField()
+    time = models.TimeField()
+
+    def __str__(self):
+        return self.name
+
+
+class Newsletter(models.Model):
+    name = models.CharField(max_length=125)
+    email = models.EmailField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Assignment(models.Model):
+    clas = models.ForeignKey(Class, on_delete=models.CASCADE)
+    question = models.FileField()
+    deadline = models.DateTimeField()
+    total_marks = models.DecimalField(max_digits=5, decimal_places=2)
+    comments = models.CharField(max_length=255)
+    created_on = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+
+    def __str__(self):
+        return self.clas.name

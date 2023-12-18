@@ -4692,6 +4692,11 @@ input[type="button"].btn-block {
   margin-bottom: -1px;
 }
 
+.faq button{
+    font-size: 1.1rem;
+    font-family: "Nunito", sans-serif;
+}
+
 .breadcrumb {
   display: flex;
   flex-wrap: wrap;
@@ -9876,7 +9881,7 @@ a.text-dark:hover, a.text-dark:focus {
   border: 0;
   padding: 25px 20px;
   color: #17a2b8;
-  box-shadow: 5px 5px 25px #ccc, 0.15);
+  box-shadow: 5px 5px 25px #023047, 0.15);
   border-radius: 0;
   display: flex;
   align-items: center;
@@ -9910,7 +9915,8 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .features .nav-link.active h4 {
-  color: #ccc;
+  color: #023047;
+  font-size: 1.6rem;
 }
 
 .features .nav-link.active i {
@@ -9992,7 +9998,7 @@ a.text-dark:hover, a.text-dark:focus {
 .portfolio #portfolio-flters li:hover,
 .portfolio #portfolio-flters li.filter-active {
   color: #fff;
-  background: #ccc;
+  background: #00b4d8;
 }
 
 .portfolio #portfolio-flters li:last-child {

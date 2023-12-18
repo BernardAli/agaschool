@@ -36,42 +36,54 @@
             <p>
               Below are our fees and charges
             </p>
+            <br>
+            <p class="section-title pr-5">
+              <span class="pr-2">Tuition Fees</span>
+            </p>
             <table class="table table-hover table-bordered table-striped datatable">
                 <thead>
                     <tr>
                         <td>Level</td>
                         <td>Class</td>
                         <td>School Fees / Term (GHS)</td>
+                    </tr>
+                </thead>
+                <tbody class="text text-center">
+                {% for tuition_fee in  tuition_fees %}
+                    <tr>
+                        <th>{{tuition_fee.level}}</th>
+                        <th>{{tuition_fee.name}}</th>
+                        <th>{{tuition_fee.tuition_fee}}</th>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            <br>
+
+            <p class="section-title pr-5">
+              <span class="pr-2">Other Fees</span>
+            </p>
+            <table class="table table-hover table-bordered table-striped datatable">
+                <thead>
+                    <tr>
+                        <td>Level</td>
+                        <td>Admission</td>
                         <td>Canteen / Day (GHS)</td>
                         <td>Uniform (GHS)</td>
                         <td>Others / Term (GHS)</td>
                     </tr>
                 </thead>
                 <tbody class="text text-center">
+                {% for tuition_fee in  other_fees %}
                     <tr>
-                        <th>Nursery</th>
-                        <th>KG 1</th>
-                        <th>520</th>
-                        <th>10</th>
-                        <th>210</th>
-                        <th>0</th>
+                        <th>{{tuition_fee.level}}</th>
+                        <th>{{tuition_fee.admission}}</th>
+                        <th>{{tuition_fee.canteen}}</th>
+                        <th>{{tuition_fee.uniform}}</th>
+                        <th>{{tuition_fee.others}}</th>
                     </tr>
-                    <tr>
-                        <th>Nursery</th>
-                        <th>KG 1</th>
-                        <th>520</th>
-                        <th>10</th>
-                        <th>210</th>
-                        <th>0</th>
-                    </tr>
-                    <tr>
-                        <th>Nursery</th>
-                        <th>KG 1</th>
-                        <th>520</th>
-                        <th>10</th>
-                        <th>210</th>
-                        <th>0</th>
-                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
           </div>

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Calendar
+{% endblock title %}
+
+
+{% block content %}
+
+<!-- Header Start -->
+    <div class="container-fluid bg-primary mb-5">
+      <div
+        class="d-flex flex-column align-items-center justify-content-center"
+        style="min-height: 400px"
+      >
+        <h3 class="display-3 font-weight-bold text-white">Online Library</h3>
+        <div class="d-inline-flex text-white">
+          <p class="m-0"><a class="text-white" href="{% url 'home' %}">Home</a></p>
+          <p class="m-0 px-2">/</p>
+          <p class="m-0">Calendar</p>
+        </div>
+      </div>
+    </div>
+<!-- Header End -->
+
+
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+      <div class="container">
+        <div>
+            <p class="section-title pr-5">
+              <span class="pr-2">2024</span>
+            </p>
+            <h1 class="mb-4">Calendar</h1>
+            <p>
+              Read through carefully and take notes of the important dates.
+            </p>
+            <table class="table table-hover table-bordered table-striped datatable">
+                <thead>
+                    <tr>
+                        <td>Date</td>
+                        <td>Activity</td>
+                    </tr>
+                </thead>
+                <tbody class="text text-center">
+                {% for activity in activities %}
+                    <tr>
+                        <th>{{activity.date}}</th>
+                        <th>{{activity.activity}}</th>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
+    <!-- About End -->
+
+{% endblock content %}

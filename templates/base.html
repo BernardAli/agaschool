@@ -97,6 +97,7 @@
               <div class="dropdown-menu rounded-0 m-0">
                 <a href="{% url 'classes' %}" class="dropdown-item">Classes</a>
                 <a href="{% url 'academics' %}" class="dropdown-item">Subjects</a>
+                <a href="{% url 'calendar' %}" class="dropdown-item">Calendar</a>
                 <a href="{% url 'library' %}" class="dropdown-item">Online Library</a>
               </div>
             </div>
@@ -284,10 +285,12 @@
         </div>
         <div class="col-lg-3 col-md-6 mb-5">
           <h3 class="text-primary mb-4">Newsletter</h3>
-          <form action="">
+          <form action="{% url 'newsletter' %}" method="post">
+            {% csrf_token %}
             <div class="form-group">
               <input
                 type="text"
+                name="name"
                 class="form-control border-0 py-4"
                 placeholder="Your Name"
                 required="required"
@@ -296,6 +299,7 @@
             <div class="form-group">
               <input
                 type="email"
+                name="email"
                 class="form-control border-0 py-4"
                 placeholder="Your Email"
                 required="required"

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.shortcuts import render, get_object_or_404, redirect
@@ -6,20 +8,28 @@ from django.views.generic import CreateView, ListView, DetailView
 
 from .forms import OnlineApplicationForm
 from .models import Class, GalleryCategory, Gallery, GamesCategory, Games, Transportation, Route, OurCareer, Testimony, \
-    Articles, Subject, AdmissionForm, OnlineApplication, Journal
+    Articles, Subject, AdmissionForm, OnlineApplication, Journal, Calendar, Announcement, OtherFee, Library, FAQ, \
+    ScheduleVisit, Newsletter, Assignment
 
-
-# Create your views here.
+today = datetime.today()
 
 
 def home_page(request):
+    activities = Calendar.objects.all()
+    announcements = Announcement.objects.all().order_by('-id')[:10]
     popular_class = Class.objects.all()[:3]
     testimonies = Testimony.objects.all()
+    tuition_fees = Class.objects.all()
     articles = Articles.objects.all().order_by('-date_posted')
+    faqs = FAQ.objects.all()
     context = {
         'popular_class': popular_class,
         'testimonies': testimonies,
+        'announcements': announcements,
         'articles': articles,
+        'tuition_fees': tuition_fees,
+        'activities': activities,
+        'faqs': faqs
     }
     return render(request, 'core/home.html', context)
 
@@ -189,21 +199,27 @@ def transportation_details(request, id):
 
 
 def remote(request):
+    assignments = Assignment.objects.all()
     context = {
-
+        'assignments': assignments
     }
     return render(request, 'core/remote.html', context)
 
 
 def library(request):
+    books = Library.objects.all().order_by('title')
     context = {
-
+        'books': books,
     }
     return render(request, 'core/library.html', context)
 
 
 def fees(request):
+    tuition_fees = Class.objects.all()
+    other_fees = OtherFee.objects.all()
     context = {
+        'tuition_fees': tuition_fees,
+        'other_fees': other_fees
     }
     return render(request, 'core/fees.html', context)
 
@@ -218,6 +234,14 @@ def counselors(request):
     context = {
     }
     return render(request, 'core/counselors.html', context)
+
+
+def calendar(request):
+    activities = Calendar.objects.all()
+    context = {
+        'activities': activities,
+    }
+    return render(request, 'core/calendar.html', context)
 
 
 def admission(request):
@@ -253,3 +277,39 @@ class JournalDetailView(DetailView):
     model = Journal
     template_name = 'core/journal_details.html'
     context_object_name = 'article'
+
+
+def schedule_visit(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        phone_number = request.POST['phone_number']
+        date = request.POST['date']
+        time = request.POST['time']
+        if ScheduleVisit.objects.filter(phone_number=phone_number).exists():
+            messages.success(request, f'Scheduled Already')
+        elif ScheduleVisit.objects.filter(email=email).exists():
+            messages.success(request, f'Scheduled Already')
+        else:
+            visit = ScheduleVisit.objects.create(name=name, email=email, phone_number=phone_number,
+                                         date=date, time=time)
+            visit.save()
+            messages.success(request, f'Visit Scheduled Successfully')
+    else:
+        return redirect("home")
+    return redirect("home")
+
+
+def newsletter(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        if Newsletter.objects.filter(email=email).exists():
+            messages.success(request, f'Already Subscribed')
+        else:
+            visit = Newsletter.objects.create(name=name, email=email)
+            visit.save()
+            messages.success(request, f'Subscribed Successfully')
+    else:
+        return redirect("home")
+    return redirect("home")
