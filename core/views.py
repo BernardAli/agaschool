@@ -10,7 +10,7 @@ from .forms import OnlineApplicationForm
 from .models import Class, GalleryCategory, Gallery, GamesCategory, Games, Transportation, Route, OurCareer, Testimony, \
     Article, Subject, AdmissionForm, OnlineApplication, Journal, Calendar, Announcement, OtherFee, Library, FAQ, \
     ScheduleVisit, Newsletter, Assignment, SubmitAssignment, VirtualClass, Management, Counselor, ArticleComment, \
-    JournalComment
+    JournalComment, Award
 
 today = datetime.today()
 
@@ -280,7 +280,9 @@ def fees(request):
 
 
 def awards(request):
+    our_awards = Award.objects.all()
     context = {
+        'awards': our_awards
     }
     return render(request, 'core/awards.html', context)
 

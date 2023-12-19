@@ -116,14 +116,23 @@ class Games(models.Model):
             img.save(self.image.path)
 
 
+class Driver(models.Model):
+    name = models.CharField(max_length=255)
+    contact = models.CharField(max_length=15)
+    whatsapp = models.CharField(max_length=15)
+    photo = models.ImageField(default="default.jpg", blank=True, null=True)
+    license_copy = models.ImageField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Transportation(models.Model):
     make = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
     registered_number = models.CharField(max_length=15)
-    driver_name = models.CharField(max_length=100)
-    driver_contact = models.CharField(max_length=15)
+    driver = models.ForeignKey(Driver, on_delete=models.DO_NOTHING)
     image = models.ImageField(upload_to='transport', null=True, blank=True)
-    driver_picture = models.ImageField(null=True, default="default.jpg")
 
     def __str__(self):
         return self.make
@@ -393,7 +402,7 @@ class Management(models.Model):
     position = models.CharField(max_length=255)
     contact = models.CharField(max_length=15)
     whatsapp = models.CharField(max_length=15)
-    photo = models.ImageField(blank=True, null=True)
+    photo = models.ImageField(default="default.jpg", blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -404,7 +413,16 @@ class Counselor(models.Model):
     position = models.CharField(max_length=255)
     contact = models.CharField(max_length=15)
     whatsapp = models.CharField(max_length=15)
-    photo = models.ImageField(blank=True, null=True)
+    photo = models.ImageField(blank=True, null=True, default="default.jpg")
 
     def __str__(self):
         return self.name
+
+
+class Award(models.Model):
+    activity = models.CharField(max_length=255)
+    photo = models.ImageField()
+    received_date = models.DateField()
+
+    def __str__(self):
+        return self.activity

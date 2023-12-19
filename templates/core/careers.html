@@ -25,33 +25,90 @@
 <!-- Header End -->
 
 
-<!-- Facilities Start -->
+  <!-- Blog Start -->
     <div class="container-fluid pt-5">
-      <div class="container pb-3">
-        <div class="row">
-          {% for career in  careers %}
-          <div class="col-lg-4 col-md-6 pb-1">
-            <div
-              class="d-flex bg-light shadow-sm border-top rounded mb-4"
-              style="padding: 30px"
-            >
-              <div class="pl-4">
-                <h4>{{ career.position }}</h4>
-                <p class="m-0">
-                  {{ career.job_description }}
+      <div class="container">
+        <div class="text-center pb-2">
+          <p class="section-title px-5">
+            <span class="px-2">Positions</span>
+          </p>
+          <h1 class="mb-4">Available Positions</h1>
+        </div>
+        <div class="row pb-3">
+          {% for position in  careers %}
+          <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow-sm mb-2">
+              <img class="card-img-top mb-2" src="{{ position.picture.url }}" alt="" />
+              <div class="card-body bg-light text-center p-4">
+                <h4 class="">{{ position.title }}</h4>
+                <div class="d-flex justify-content-center mb-3">
+                  <small class="mr-3"
+                    ><i class="fas fa-clock text-primary"></i> {{ position.deadline }}</small
+                  >
+                  <small class="mr-3"
+                    ><i class="fa fa-folder text-primary"></i> {{ position.position }}</small
+                  >
+                </div>
+                <p>
+                  {{ position.job_description|truncatechars:140 }}
                 </p>
-                <p class="m-0">
-                  {{ career.deadline }}
-                </p>
-                <a href="{% url 'career_detail' career.id %}">View Details</a>
+                <a href = "mailto:abc@example.com" class="btn btn-primary px-4 mx-auto my-2"
+                  >Apply Now</a
+                >
               </div>
             </div>
           </div>
           {% empty %}
-            <p class="empty">We are not employing at the moment</p>
+            <p class="text-center"><b>No Position Available</b></p>
           {% endfor %}
         </div>
       </div>
     </div>
-    <!-- Facilities Start -->
+  <!-- Blog End -->
+
+
+    <!-- Blog Start -->
+    <div class="container-fluid pt-5">
+      <div class="container">
+        <div class="text-center pb-2">
+          <p class="section-title px-5">
+            <span class="px-2">Rules</span>
+          </p>
+          <h1 class="mb-4">How to Apply for a position.</h1>
+        </div>
+        <div class="row pb-3">
+          <div class="accordion accordion-flush" id="faqlist1">
+                <div class="accordion-item">
+                <h2 class="accordion-header faq">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
+                    How to Apply?
+                  </button>
+                </h2>
+                <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
+                  <div class="accordion-body">
+                    Simply click on the Apply Now to apply via an email
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="accordion accordion-flush" id="faqlist2">
+                <div class="accordion-item">
+                <h2 class="accordion-header faq">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
+                    What are the Required Documents
+                  </button>
+                </h2>
+                <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
+                  <div class="accordion-body">
+                    Your CV and a Copy of Academic Certificate.
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  <!-- Blog End -->
+
+
 {% endblock content %}
