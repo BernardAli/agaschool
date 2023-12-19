@@ -14,6 +14,7 @@ urlpatterns = [
     path("counselors/", views.counselors, name='counselors'),
     path("schedule_visit/", views.schedule_visit, name='schedule_visit'),
     path("newsletter/", views.newsletter, name='newsletter'),
+    path("submit_assignment/", views.submit_assignment, name='submit_assignment'),
     path("calendar/", views.calendar, name='calendar'),
     path("management/", views.management, name='management'),
     path("admission/", views.CreateAdmissionView.as_view(), name='admission'),

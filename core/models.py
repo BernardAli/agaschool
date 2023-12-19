@@ -2,6 +2,8 @@ from PIL import Image
 from django.db import models
 from django.urls import reverse
 
+from authy.models import User
+
 # Create your models here.
 
 LEVEL_CHOICES = (
@@ -334,7 +336,17 @@ class Assignment(models.Model):
     deadline = models.DateTimeField()
     total_marks = models.DecimalField(max_digits=5, decimal_places=2)
     comments = models.CharField(max_length=255)
-    created_on = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.clas.name
+
+
+class SubmitAssignment(models.Model):
+    student = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    assignment_id = models.CharField(max_length=125)
+    answer_file = models.FileField()
+    submitted_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.assignment_id

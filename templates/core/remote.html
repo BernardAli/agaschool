@@ -27,7 +27,7 @@
 <!-- About Start -->
     <div class="container-fluid py-5">
       <div class="container">
-        <div>
+        <div class="text-center pb-2">
             <p class="section-title pr-5">
               <span class="pr-2">Remote Learning</span>
             </p>
@@ -74,11 +74,11 @@
                       </tbody>
                     </table>
                     <br>
-                    <form action="" method="post" class="form">
+                    <form action="{% url 'submit_assignment' %}" method="post" class="form" enctype="multipart/form-data">
                       {% csrf_token %}
                       <h5>Upload your assignment:</h5>
                       <p>Make your you add the correct ID</p>
-                      <input type="text" name="assignment_code" id="assignment_code" placeholder="Assignment ID" class="form-control">
+                      <input type="text" name="assignment_id" id="assignment_code" placeholder="Assignment ID" class="form-control">
                       <br>
                       <input type="file" name="answer_file" id="answer_file" class="form-control">
                       <br>
@@ -89,5 +89,46 @@
       </div>
     </div>
 <!-- About End -->
+
+<!-- Class Start -->
+    <div class="container-fluid pt-5">
+      <div class="container">
+        <div class="text-center pb-2">
+          <p class="section-title px-5">
+            <span class="px-2">Online Classes</span>
+          </p>
+          <h1 class="mb-4">Virtual Classes</h1>
+        </div>
+
+          <p class="text text-center">
+              <b>Continually check the site to ensure that you don't miss any virtual class.</b>
+          </p>
+
+          <table class="table table-striped table-hover datatable">
+              <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Title</th>
+                    <th>Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+              </tbody>
+          </table>
+
+          <p class="text text-center">
+              <b>Click on the link to enter the class.</b>
+          </p>
+      </div>
+    </div>
+<!-- Class End -->
 
 {% endblock content %}

@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import (
     Class, GalleryCategory, Gallery, GamesCategory, Games, Transportation,
     Route, OurCareer, Articles, ArticlesCategories, Subject, AdmissionForm, OnlineApplication, Journal, Calendar,
-    Announcement, OtherFee, Library, FAQ, ScheduleVisit, Newsletter, Assignment)
+    Announcement, OtherFee, Library, FAQ, ScheduleVisit, Newsletter, Assignment, SubmitAssignment)
 
 # Register your models here.
 
@@ -29,3 +29,4 @@ admin.site.register(FAQ)
 admin.site.register(ScheduleVisit)
 admin.site.register(Newsletter)
 admin.site.register(Assignment)
+admin.site.register(SubmitAssignment)

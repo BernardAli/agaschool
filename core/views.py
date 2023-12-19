@@ -9,7 +9,7 @@ from django.views.generic import CreateView, ListView, DetailView
 from .forms import OnlineApplicationForm
 from .models import Class, GalleryCategory, Gallery, GamesCategory, Games, Transportation, Route, OurCareer, Testimony, \
     Articles, Subject, AdmissionForm, OnlineApplication, Journal, Calendar, Announcement, OtherFee, Library, FAQ, \
-    ScheduleVisit, Newsletter, Assignment
+    ScheduleVisit, Newsletter, Assignment, SubmitAssignment
 
 today = datetime.today()
 
@@ -313,3 +313,16 @@ def newsletter(request):
     else:
         return redirect("home")
     return redirect("home")
+
+
+def submit_assignment(request):
+    user = request.user
+    if request.method == 'POST':
+        assignment_id = request.POST['assignment_id']
+        answer_file = request.POST.get('answer_file')
+        assignment = SubmitAssignment.objects.create(student=user, assignment_id=assignment_id, answer_file=answer_file)
+        assignment.save()
+        messages.success(request, f'Assignment Submitted Successfully')
+    else:
+        return redirect("remote")
+    return redirect("remote")
