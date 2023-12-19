@@ -8,8 +8,8 @@ from django.views.generic import CreateView, ListView, DetailView
 
 from .forms import OnlineApplicationForm
 from .models import Class, GalleryCategory, Gallery, GamesCategory, Games, Transportation, Route, OurCareer, Testimony, \
-    Articles, Subject, AdmissionForm, OnlineApplication, Journal, Calendar, Announcement, OtherFee, Library, FAQ, \
-    ScheduleVisit, Newsletter, Assignment, SubmitAssignment
+    Article, Subject, AdmissionForm, OnlineApplication, Journal, Calendar, Announcement, OtherFee, Library, FAQ, \
+    ScheduleVisit, Newsletter, Assignment, SubmitAssignment, VirtualClass, Management, Counselor
 
 today = datetime.today()
 
@@ -20,7 +20,7 @@ def home_page(request):
     popular_class = Class.objects.all()[:3]
     testimonies = Testimony.objects.all()
     tuition_fees = Class.objects.all()
-    articles = Articles.objects.all().order_by('-date_posted')
+    articles = Article.objects.all().order_by('-date_posted')
     faqs = FAQ.objects.all()
     context = {
         'popular_class': popular_class,
@@ -56,8 +56,9 @@ def history(request):
 
 
 def management(request):
+    managements = Management.objects.all()
     context = {
-
+        'managements': managements
     }
     return render(request, 'core/management.html', context)
 
@@ -132,7 +133,7 @@ def gallery(request):
 
 
 def articles(request):
-    articles = Articles.objects.all().order_by('-date_posted')
+    articles = Article.objects.all().order_by('-date_posted')
     context = {
         'articles': articles,
     }
@@ -140,8 +141,8 @@ def articles(request):
 
 
 def article_details(request, id):
-    article = get_object_or_404(Articles, id=id)
-    recent_article = Articles.objects.all().order_by('-date_posted')[:5]
+    article = get_object_or_404(Article, id=id)
+    recent_article = Article.objects.all().order_by('-date_posted')[:5]
     context = {
         'article': article,
         'recent_article': recent_article,
@@ -200,7 +201,9 @@ def transportation_details(request, id):
 
 def remote(request):
     assignments = Assignment.objects.all()
+    virtual_classes = VirtualClass.objects.all().order_by('-date', 'start_time')
     context = {
+        'virtual_classes': virtual_classes,
         'assignments': assignments
     }
     return render(request, 'core/remote.html', context)
@@ -231,7 +234,9 @@ def awards(request):
 
 
 def counselors(request):
+    our_counselors = Counselor.objects.all()
     context = {
+        'our_counselors': our_counselors,
     }
     return render(request, 'core/counselors.html', context)
 
@@ -245,14 +250,16 @@ def calendar(request):
 
 
 def admission(request):
-    form_file = AdmissionForm.objects.all().first()
+    form_file = AdmissionForm.objects.all().last()
     form = OnlineApplicationForm(request.POST)
     if request.method == 'POST':
         if form.is_valid():
             form.save()
             return redirect('home')
+        else:
+            form = OnlineApplicationForm()
     else:
-        form = OnlineApplicationForm(request.POST)
+        form = OnlineApplicationForm()
     context = {
         'form_file': form_file,
         'form': form,
@@ -260,11 +267,11 @@ def admission(request):
     return render(request, 'core/admission.html', context)
 
 
-class CreateAdmissionView(CreateView):
-    model = OnlineApplication
-    form_class = OnlineApplicationForm
-    template_name = 'core/admission.html'
-    success_url = reverse_lazy('home')
+# class CreateAdmissionView(CreateView):
+#     model = OnlineApplication
+#     form_class = OnlineApplicationForm
+#     template_name = 'core/admission.html'
+#     success_url = reverse_lazy('home')
 
 
 class JournalListView(ListView):

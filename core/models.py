@@ -184,30 +184,28 @@ class ArticlesCategories(models.Model):
         return reverse('category_detail', args=[str(self.id)])
 
 
-class Articles(models.Model):
-    title = models.CharField(max_length=255)
+class Article(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(ArticlesCategories, on_delete=models.CASCADE)
-    picture_1 = models.ImageField(default='', upload_to='blog')
-    blockquote = models.CharField(max_length=255, null=True, blank=True)
-    picture_2 = models.ImageField(upload_to='blog', null=True, blank=True)
-    picture_3 = models.ImageField(upload_to='blog', null=True, blank=True)
-    detail_1 = models.TextField(null=True, blank=True)
-    detail_2 = models.TextField(null=True, blank=True)
-    topic_3 = models.CharField(max_length=255, null=True, blank=True)
-    detail_3 = models.TextField(null=True, blank=True)
-    topic_4 = models.CharField(max_length=255, null=True, blank=True)
-    detail_4 = models.TextField(null=True, blank=True)
-    detail_5 = models.TextField(null=True, blank=True)
-    detail_6 = models.TextField(null=True, blank=True)
-    banner = models.BooleanField(default=False)
-    date_posted = models.DateTimeField(auto_now_add=True)
-    author = models.CharField(max_length=155)
-    author_pic = models.ImageField(upload_to='blog', default="default.jpg", null=True, blank=True)
-
-    # author = models.ForeignKey(User, on_delete=models.CASCADE)
+    image_1 = models.ImageField()
+    image_2 = models.ImageField(blank=True, null=True)
+    title = models.CharField(max_length=255)
+    texts = models.CharField(max_length=255)
+    paragraph_1 = models.TextField()
+    paragraph_2 = models.TextField()
+    paragraph_3 = models.TextField(blank=True, null=True)
+    paragraph_4 = models.TextField(blank=True, null=True)
+    paragraph_5 = models.TextField(blank=True, null=True)
+    paragraph_6 = models.TextField(blank=True, null=True)
+    paragraph_7 = models.TextField(blank=True, null=True)
+    paragraph_8 = models.TextField(blank=True, null=True)
+    paragraph_9 = models.TextField(blank=True, null=True)
+    prayer = models.TextField(blank=True, null=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.title}"
+        return self.title
 
     def get_absolute_url(self):
         return reverse('article_detail', args=[str(self.id)])
@@ -244,14 +242,21 @@ class Journal(models.Model):
 
 class AdmissionForm(models.Model):
     form_file = models.FileField(upload_to='admission_form')
+    posted_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Admission Form"
 
 
 class OnlineApplication(models.Model):
     full_name = models.CharField(max_length=125)
+    email = models.EmailField()
+    contact = models.CharField(max_length=30)
+    address = models.CharField(max_length=50)
     birth_date = models.DateField()
     expected_class = models.ForeignKey(Class, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=15)
-    current_academic_report = models.FileField()
+    current_academic_report = models.FileField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.full_name}"
@@ -350,3 +355,38 @@ class SubmitAssignment(models.Model):
 
     def __str__(self):
         return self.assignment_id
+
+
+class VirtualClass(models.Model):
+    clas = models.ForeignKey(Class, on_delete=models.CASCADE)
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    title = models.CharField(max_length=255)
+    link = models.URLField()
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.clas.name
+
+
+class Management(models.Model):
+    name = models.CharField(max_length=255)
+    position = models.CharField(max_length=255)
+    contact = models.CharField(max_length=15)
+    whatsapp = models.CharField(max_length=15)
+    photo = models.ImageField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Counselor(models.Model):
+    name = models.CharField(max_length=255)
+    position = models.CharField(max_length=255)
+    contact = models.CharField(max_length=15)
+    whatsapp = models.CharField(max_length=15)
+    photo = models.ImageField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name

@@ -115,12 +115,15 @@
                 </tr>
               </thead>
               <tbody>
+              {% for class in virtual_classes %}
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{class.date}}</td>
+                    <td>{{class.start_time}}</td>
+                    <td>{{class.end_time}}</td>
+                    <td>{{class.title}}</td>
+                    <td><a href="{{class.link}}">Click Here</a></td>
                 </tr>
+              {% endfor %}
               </tbody>
           </table>
 
