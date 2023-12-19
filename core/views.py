@@ -20,7 +20,7 @@ def home_page(request):
     popular_class = Class.objects.all()[:3]
     testimonies = Testimony.objects.all()
     tuition_fees = Class.objects.all()
-    articles = Article.objects.all().order_by('-date_posted')
+    articles = Article.objects.all().order_by('-created_on')
     faqs = FAQ.objects.all()
     context = {
         'popular_class': popular_class,
@@ -133,7 +133,7 @@ def gallery(request):
 
 
 def articles(request):
-    articles = Article.objects.all().order_by('-date_posted')
+    articles = Article.objects.all().order_by('-created_on')
     context = {
         'articles': articles,
     }
@@ -142,7 +142,7 @@ def articles(request):
 
 def article_details(request, id):
     article = get_object_or_404(Article, id=id)
-    recent_article = Article.objects.all().order_by('-date_posted')[:5]
+    recent_article = Article.objects.all().order_by('-created_on')[:5]
     context = {
         'article': article,
         'recent_article': recent_article,

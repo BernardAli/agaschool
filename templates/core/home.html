@@ -325,6 +325,10 @@
           {% endfor %}
         </div>
       </div>
+
+       <div style="text-align:center;">
+            <a href="{% url 'classes' %}" class="btn btn-primary mt-4 py-2 px-4">View All Classes</a>
+          </div>
     </div>
     <!-- Class End -->
 
@@ -486,7 +490,7 @@
           {% for article in  articles %}
           <div class="col-lg-4 mb-4">
             <div class="card border-0 shadow-sm mb-2">
-              <img class="card-img-top mb-2" src="{{ article.picture_1.url }}" alt="" />
+              <img class="card-img-top mb-2" src="{{ article.image_1.url }}" alt="" />
               <div class="card-body bg-light text-center p-4">
                 <h4 class="">{{ article.title }}</h4>
                 <div class="d-flex justify-content-center mb-3">
@@ -498,7 +502,7 @@
                   >
                 </div>
                 <p>
-                  {{ article.blockquote }}
+                  {{ article.paragraph_1|truncatechars:140 }}
                 </p>
                 <a href="{% url 'article_details' article.id %}" class="btn btn-primary px-4 mx-auto my-2"
                   >Read More</a
@@ -507,7 +511,7 @@
             </div>
           </div>
           {% empty %}
-            <p class="empty">No Articles Added</p>
+            <p class="text-center"><b>No Articles Added</b></p>
           {% endfor %}
         </div>
       </div>

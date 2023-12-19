@@ -190,7 +190,7 @@ class Article(models.Model):
     image_1 = models.ImageField()
     image_2 = models.ImageField(blank=True, null=True)
     title = models.CharField(max_length=255)
-    texts = models.CharField(max_length=255)
+    quote_1 = models.CharField(max_length=255)
     paragraph_1 = models.TextField()
     paragraph_2 = models.TextField()
     paragraph_3 = models.TextField(blank=True, null=True)
@@ -200,7 +200,7 @@ class Article(models.Model):
     paragraph_7 = models.TextField(blank=True, null=True)
     paragraph_8 = models.TextField(blank=True, null=True)
     paragraph_9 = models.TextField(blank=True, null=True)
-    prayer = models.TextField(blank=True, null=True)
+    quote_2 = models.TextField(blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -209,6 +209,16 @@ class Article(models.Model):
 
     def get_absolute_url(self):
         return reverse('article_detail', args=[str(self.id)])
+
+
+class ArticleComment(models.Model):
+    name = models.CharField(max_length=124)
+    comment = models.TextField()
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Journal(models.Model):
