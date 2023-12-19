@@ -3,7 +3,7 @@ from .models import (
     Class, GalleryCategory, Gallery, GamesCategory, Games, Transportation,
     Route, OurCareer, Article, ArticlesCategories, Subject, AdmissionForm, OnlineApplication, Journal, Calendar,
     Announcement, OtherFee, Library, FAQ, ScheduleVisit, Newsletter, Assignment, SubmitAssignment, VirtualClass,
-    Management, Counselor)
+    Management, Counselor, ArticleComment, JournalComment)
 
 # Register your models here.
 
@@ -17,11 +17,13 @@ admin.site.register(Transportation)
 admin.site.register(Route)
 admin.site.register(OurCareer)
 admin.site.register(Article)
+admin.site.register(ArticleComment)
 admin.site.register(ArticlesCategories)
 admin.site.register(Subject)
 admin.site.register(AdmissionForm)
 admin.site.register(OnlineApplication)
 admin.site.register(Journal)
+admin.site.register(JournalComment)
 admin.site.register(Calendar)
 admin.site.register(Announcement)
 admin.site.register(OtherFee)

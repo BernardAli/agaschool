@@ -29,15 +29,15 @@
       <div class="container">
         <div class="text-center pb-2">
           <p class="section-title px-5">
-            <span class="px-2">Our Blog</span>
+            <span class="px-2">Student Journal</span>
           </p>
-          <h1 class="mb-4">Our News Articles</h1>
+          <h1 class="mb-4">Our Journal</h1>
         </div>
         <div class="row pb-3">
-          {% for article in  articles %}
+          {% for article in  journals %}
           <div class="col-lg-4 mb-4">
             <div class="card border-0 shadow-sm mb-2">
-              <img class="card-img-top mb-2" src="{{ article.picture_1.url }}" alt="" />
+              <img class="card-img-top mb-2" src="{{ article.image_1.url }}" alt="" />
               <div class="card-body bg-light text-center p-4">
                 <h4 class="">{{ article.title }}</h4>
                 <div class="d-flex justify-content-center mb-3">
@@ -49,16 +49,16 @@
                   >
                 </div>
                 <p>
-                  {{ article.blockquote }}
+                  {{ article.paragraph_1|truncatechars:140 }}
                 </p>
-                <a href="{% url 'journal_details' article.id %}" class="btn btn-primary px-4 mx-auto my-2"
+                <a href="{% url 'journal_details' article.pk %}" class="btn btn-primary px-4 mx-auto my-2"
                   >Read More</a
                 >
               </div>
             </div>
           </div>
           {% empty %}
-            <p class="empty">No Articles Added</p>
+            <p class="text-center"><b>No Journal Added</b></p>
           {% endfor %}
         </div>
       </div>

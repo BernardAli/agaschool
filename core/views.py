@@ -9,7 +9,8 @@ from django.views.generic import CreateView, ListView, DetailView
 from .forms import OnlineApplicationForm
 from .models import Class, GalleryCategory, Gallery, GamesCategory, Games, Transportation, Route, OurCareer, Testimony, \
     Article, Subject, AdmissionForm, OnlineApplication, Journal, Calendar, Announcement, OtherFee, Library, FAQ, \
-    ScheduleVisit, Newsletter, Assignment, SubmitAssignment, VirtualClass, Management, Counselor
+    ScheduleVisit, Newsletter, Assignment, SubmitAssignment, VirtualClass, Management, Counselor, ArticleComment, \
+    JournalComment
 
 today = datetime.today()
 
@@ -142,19 +143,70 @@ def articles(request):
 
 def article_details(request, id):
     article = get_object_or_404(Article, id=id)
+    comments = ArticleComment.objects.filter(article=article)
     recent_article = Article.objects.all().order_by('-created_on')[:5]
     context = {
         'article': article,
         'recent_article': recent_article,
+        'comments': comments
     }
     return render(request, 'core/article_details.html', context)
 
 
-def journal(request):
-    context = {
+def article_comment(request, id):
+    article = Article.objects.get(id=id)
+    if request.method == 'POST':
+        name = request.POST['name']
+        comment = request.POST['comment']
+        if contact == "":
+            messages.error(request, "Please write your contact")
+        elif comment == "":
+            messages.error(request, "Please write your comment")
+        else:
+            ArticleComment.objects.create(article_id=article.id, name=name, comment=comment)
+            article.save()
+            messages.error(request, "Comments Added Successfully")
+    else:
+        messages.error(request, "Error")
+    return redirect('article_details', article.id)
 
+
+def journal(request):
+    journals = Journal.objects.all()
+    context = {
+        'journals': journals
     }
     return render(request, 'core/journal.html', context)
+
+
+def journal_details(request, id):
+    article = get_object_or_404(Journal, id=id)
+    comments = JournalComment.objects.filter(article=article)
+    recent_article = Journal.objects.all().order_by('-created_on')[:5]
+    context = {
+        'article': article,
+        'recent_article': recent_article,
+        'comments': comments
+    }
+    return render(request, 'core/journal_details.html', context)
+
+
+def journal_comment(request, id):
+    article = Journal.objects.get(id=id)
+    if request.method == 'POST':
+        name = request.POST['name']
+        comment = request.POST['comment']
+        if contact == "":
+            messages.error(request, "Please write your contact")
+        elif comment == "":
+            messages.error(request, "Please write your comment")
+        else:
+            JournalComment.objects.create(article_id=article.id, name=name, comment=comment)
+            article.save()
+            messages.error(request, "Comments Added Successfully")
+    else:
+        messages.error(request, "Error")
+    return redirect('journal_details', article.id)
 
 
 def careers(request):
@@ -272,18 +324,6 @@ def admission(request):
 #     form_class = OnlineApplicationForm
 #     template_name = 'core/admission.html'
 #     success_url = reverse_lazy('home')
-
-
-class JournalListView(ListView):
-    model = Journal
-    template_name = 'core/journal.html'
-    context_object_name = 'articles'
-
-
-class JournalDetailView(DetailView):
-    model = Journal
-    template_name = 'core/journal_details.html'
-    context_object_name = 'article'
 
 
 def schedule_visit(request):
