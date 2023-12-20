@@ -40,21 +40,18 @@
             </p>
             <div class="row pt-2 pb-4">
               <div class="col-6 col-md-4">
-                <img class="img-fluid rounded" src="{% static 'img/about-2.jpg' %}" alt="" />
+                <img class="img-fluid rounded" src="{{ name.picture.url }}" alt="" />
               </div>
               <div class="col-6 col-md-8">
                 <ul class="list-inline m-0">
                   <li class="py-2 border-top border-bottom">
-                    <i class="fa fa-check text-primary mr-3"></i>Labore eos amet
-                    dolor amet diam
+                    <i class="fa fa-check text-primary mr-3"></i><b>School Fees:</b> GHS {{name.tuition_fee}} / {{name.tuition_interval}}
                   </li>
                   <li class="py-2 border-bottom">
-                    <i class="fa fa-check text-primary mr-3"></i>Etsea et sit
-                    dolor amet ipsum
+                    <i class="fa fa-check text-primary mr-3"></i><b>Class Captain: {{ name.captain.full_name }}</b>
                   </li>
                   <li class="py-2 border-bottom">
-                    <i class="fa fa-check text-primary mr-3"></i>Diam dolor diam
-                    elitripsum vero.
+                    <i class="fa fa-check text-primary mr-3"></i><b>Total Students:</b> {{total_students}} Students
                   </li>
                 </ul>
               </div>
@@ -64,7 +61,7 @@
           <div class="col-lg-5">
             <img
               class="img-fluid rounded mb-5 mb-lg-0"
-              src="{% static 'img/about-1.jpg' %}"
+              src="{{ name.picture.url }}"
               alt=""
             />
           </div>
@@ -93,7 +90,7 @@
 
           <li class="nav-item col-4 col-md-4 col-lg-3">
             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-3">
-              <h4>Assignments</h4>
+              <h4>Results</h4>
             </a>
           </li><!-- End Tab 3 Nav -->
 
@@ -163,7 +160,7 @@
           <div class="tab-pane" id="tab-3">
             <div class="row">
               <div class="col-lg-8 order-2 order-lg-1">
-                <h3>Fees</h3>
+                <h3>Results</h3>
                 <p>
                   Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
                   velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
@@ -190,7 +187,7 @@
           <p class="section-title px-5">
             <span class="px-2">Class Teacher</span>
           </p>
-          <h1 class="mb-4">Meet Teacher Name</h1>
+          <h1 class="mb-4">Meet The Class Teacher</h1>
         </div>
         <div class="row">
           <div class="col-md-6 col-lg-3 text-center team mb-5">
@@ -198,53 +195,54 @@
               class="position-relative overflow-hidden mb-4"
               style="border-radius: 100%"
             >
-              <img class="img-fluid w-100" src="{% static 'img/team-1.jpg' %}" alt="" />
+              <img class="img-fluid w-100" src="{{name.teacher.avatar.url}}" alt="" />
               <div
                 class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute"
               >
                 <a
                   class="btn btn-outline-light text-center mr-2 px-0"
                   style="width: 38px; height: 38px"
-                  href="#"
+                  href="tel:+233{{name.teacher.phone}}"
                   ><i class="fa fa-phone"></i
                 ></a>
                 <a
                   class="btn btn-outline-light text-center mr-2 px-0"
                   style="width: 38px; height: 38px"
-                  href="#"
+                  href="https://api.whatsapp.com/send?phone=233{{name.teacher.phone}}"
                   ><i class="fab fa-facebook-f"></i
                 ></a>
+                {% if name.teacher.linkedin_url %}
                 <a
                   class="btn btn-outline-light text-center px-0"
                   style="width: 38px; height: 38px"
-                  href="#"
+                  href="{{name.teacher.linkedin_url}}"
                   ><i class="fab fa-linkedin-in"></i
                 ></a>
+                {% endif %}
               </div>
             </div>
-            <h4>Julia Smith</h4>
-            <i>Class Teacher</i>
+            <h4>{{name.teacher.full_name}}</h4>
           </div>
           <div class="col-md-6 col-lg-8 ">
             <br>
             <h5>Profile</h5>
             <p>
-              {{name.description}}
+              {{name.teacher.profile}}
             </p>
             <div class="row pt-2 pb-4">
               <div class="col-12">
                 <ul class="list-inline m-0">
                   <li class="py-2 border-top border-bottom">
-                    <i class="fa fa-check text-primary mr-3"></i>Labore eos amet
-                    dolor amet diam
+                    <i class="fa fa-check text-primary mr-3"></i>{{name.teacher.full_name}}
+                  </li>
+                  <li class="py-2 border-top border-bottom">
+                    <i class="fa fa-check text-primary mr-3"></i>{{name.teacher.gender}}
                   </li>
                   <li class="py-2 border-bottom">
-                    <i class="fa fa-check text-primary mr-3"></i>Etsea et sit
-                    dolor amet ipsum
+                    <i class="fa fa-check text-primary mr-3"></i>{{name.teacher.phone}}
                   </li>
                   <li class="py-2 border-bottom">
-                    <i class="fa fa-check text-primary mr-3"></i>Diam dolor diam
-                    elitripsum vero.
+                    <i class="fa fa-check text-primary mr-3"></i>{{name.teacher.residence}}, {{name.teacher.region}} Region
                   </li>
                 </ul>
               </div>

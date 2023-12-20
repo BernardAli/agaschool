@@ -44,6 +44,8 @@ class Class(models.Model):
     start_time = models.TimeField(max_length=15)
     close_time = models.TimeField(max_length=15)
     description = models.TextField(null=True, blank=True)
+    teacher = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    captain = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='class_captain')
 
     def __str__(self):
         return self.name

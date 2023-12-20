@@ -6,6 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView
 
+from authy.models import User
 from .forms import OnlineApplicationForm
 from .models import Class, GalleryCategory, Gallery, GamesCategory, Games, Transportation, Route, OurCareer, Testimony, \
     Article, Subject, AdmissionForm, OnlineApplication, Journal, Calendar, Announcement, OtherFee, Library, FAQ, \
@@ -81,8 +82,10 @@ def classes(request):
 
 def class_detail(request, slug):
     name = Class.objects.get(slug=slug)
+    total_students = User.objects.filter(classes=name.id).count()
     context = {
-        'name': name
+        'name': name,
+        'total_students': total_students,
     }
     return render(request, 'core/class_detail.html', context)
 
