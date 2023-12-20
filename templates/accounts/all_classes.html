@@ -4,11 +4,11 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>All Students</h1>
+      <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Our Students</li>
+          <li class="breadcrumb-item active">Our Classes</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -77,26 +77,26 @@
               <div class="card top-selling overflow-auto">
 
                 <div class="card-body pb-0">
-                  <h5 class="card-title">Our Students</h5>
+                  <h5 class="card-title">Our Classes</h5>
 
-                  <table class="table table-striped table-hover datatable">
+                  <table class="table table-striped table-hover">
                     <thead>
                       <tr>
-                        <th>Name</th>
-                        <th>Class</th>
-                        <th>Gender</th>
-                        <th>Contact</th>
-                        <th>Address</th>
+                        <th scope="col">Picture</th>
+                        <th scope="col">Class</th>
+                        <th scope="col">Teacher</th>
+                        <th scope="col">Total Students</th>
+                        <th scope="col">Total Arrears</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {% for student in students %}
+                      {% for class in classes %}
                         <tr>
-                        <td><a href="{% url 'account_profile' student.username %}">{{student.full_name}}</a></td>
-                        <td>{{student.classes.first}}</td>
-                        <td>{{student.gender}}</td>
-                        <td>{{student.phone}}</td>
-                        <td>{{student.residence}}</td>
+                        <th scope="row"><a href="#"><img src="{{class.picture.url}}" alt=""></a></th>
+                        <td><a href="#" class="text-primary fw-bold">{{class.name}}</a></td>
+                        <td>{{class.teacher.full_name}}</td>
+                        <td class="fw-bold">24</td>
+                        <td>$5,828</td>
                       </tr>
                       {% endfor %}
                     </tbody>
@@ -108,70 +108,75 @@
             </div>
             <!-- End Top Selling -->
 
-            <div class="col-lg-12">
+            <!-- Reports -->
+            <div class="col-12">
               <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Pie Chart</h5>
 
-                  <!-- Pie Chart -->
-                  <div id="pieChart" style="min-height: 400px;" class="echart"></div>
+                <div class="card-body">
+                  <h5 class="card-title">Reports <span>/ Daily</span></h5>
+
+                  <!-- Line Chart -->
+                  <div id="reportsChart"></div>
 
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
-                      echarts.init(document.querySelector("#pieChart")).setOption({
-                        title: {
-                          text: 'Students Statistics',
-                          subtext: 'Ages',
-                          left: 'center'
+                      new ApexCharts(document.querySelector("#reportsChart"), {
+                        series: [{
+                          name: 'Sales',
+                          data: [31, 40, 28, 51, 42, 82, 56],
+                        }, {
+                          name: 'Revenue',
+                          data: [11, 32, 45, 32, 34, 52, 41]
+                        }, {
+                          name: 'Customers',
+                          data: [15, 11, 32, 18, 9, 24, 11]
+                        }],
+                        chart: {
+                          height: 350,
+                          type: 'area',
+                          toolbar: {
+                            show: false
+                          },
+                        },
+                        markers: {
+                          size: 4
+                        },
+                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                        fill: {
+                          type: "gradient",
+                          gradient: {
+                            shadeIntensity: 1,
+                            opacityFrom: 0.3,
+                            opacityTo: 0.4,
+                            stops: [0, 90, 100]
+                          }
+                        },
+                        dataLabels: {
+                          enabled: false
+                        },
+                        stroke: {
+                          curve: 'smooth',
+                          width: 2
+                        },
+                        xaxis: {
+                          type: 'datetime',
+                          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
                         },
                         tooltip: {
-                          trigger: 'item'
-                        },
-                        legend: {
-                          orient: 'vertical',
-                          left: 'left'
-                        },
-                        series: [{
-                          name: 'Access From',
-                          type: 'pie',
-                          radius: '50%',
-                          data: [{
-                              value: 1048,
-                              name: '<2 years'
-                            },
-                            {
-                              value: 735,
-                              name: '2 - 6 years'
-                            },
-                            {
-                              value: 580,
-                              name: '7 - 10 years'
-                            },
-                            {
-                              value: 484,
-                              name: '11 - 14 years'
-                            },
-                            {
-                              value: 300,
-                              name: '> 15 years'
-                            }
-                          ],
-                          emphasis: {
-                            itemStyle: {
-                              shadowBlur: 10,
-                              shadowOffsetX: 0,
-                              shadowColor: 'rgba(0, 0, 0, 0.5)'
-                            }
-                          }
-                        }]
-                      });
+                          x: {
+                            format: 'dd/MM/yy HH:mm'
+                          },
+                        }
+                      }).render();
                     });
                   </script>
-                  <!-- End Pie Chart -->
+                  <!-- End Line Chart -->
 
                 </div>
+
               </div>
             </div>
+            <!-- End Reports -->
 
           </div>
         </div><!-- End Left side columns -->

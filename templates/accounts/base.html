@@ -109,7 +109,7 @@
         </a>
         <ul id="components-Staff" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-alerts.html">
+            <a href="{% url 'all_staff' %}">
               <i class="bi bi-circle"></i><span>All Staff</span>
             </a>
           </li>
@@ -124,11 +124,11 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-class" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Class</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-menu-button-wide"></i><span>Classes</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-class" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-alerts.html">
+            <a href="{% url 'all_classes' %}">
               <i class="bi bi-circle"></i><span>All Classes</span>
             </a>
           </li>

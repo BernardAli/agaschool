@@ -4,11 +4,11 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>All Students</h1>
+      <h1>All Staff</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Our Students</li>
+          <li class="breadcrumb-item active">Our Staff</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -25,7 +25,7 @@
               <div class="card info-card sales-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Pre-School <span>| Total</span></h5>
+                  <h5 class="card-title">Teaching <span>| Total</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="ps-3">
@@ -42,7 +42,7 @@
               <div class="card info-card sales-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Primary <span>| Total</span></h5>
+                  <h5 class="card-title">Non-Teaching <span>| Total</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="ps-3">
@@ -59,7 +59,7 @@
               <div class="card info-card sales-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Junior High <span>| Total</span></h5>
+                  <h5 class="card-title">Others <span>| Total</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="ps-3">
@@ -90,9 +90,9 @@
                       </tr>
                     </thead>
                     <tbody>
-                      {% for student in students %}
+                      {% for class in classes %}
                         <tr>
-                        <td><a href="{% url 'account_profile' student.username %}">{{student.full_name}}</a></td>
+                        <td><a href="">{{student.full_name}}</a></td>
                         <td>{{student.classes.first}}</td>
                         <td>{{student.gender}}</td>
                         <td>{{student.phone}}</td>
@@ -120,7 +120,7 @@
                     document.addEventListener("DOMContentLoaded", () => {
                       echarts.init(document.querySelector("#pieChart")).setOption({
                         title: {
-                          text: 'Students Statistics',
+                          text: 'Salary Statistics',
                           subtext: 'Ages',
                           left: 'center'
                         },
@@ -181,21 +181,9 @@
 
           <!-- Recent Activity -->
           <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
 
             <div class="card-body">
-              <h5 class="card-title">Recent Activity <span>| Today</span></h5>
+              <h5 class="card-title">Staff Bar Chart <span>| Today</span></h5>
 
               <!-- Bar Chart -->
               <div id="barChart" style="min-height: 400px;" class="echart"></div>
@@ -205,7 +193,7 @@
                   echarts.init(document.querySelector("#barChart")).setOption({
                     xAxis: {
                       type: 'category',
-                      data: ['Pre-School', 'Primary', 'Junior High']
+                      data: ['Teaching', 'Non-Teaching', 'Others']
                     },
                     yAxis: {
                       type: 'value'
@@ -220,7 +208,8 @@
               <!-- End Bar Chart -->
 
             </div>
-          </div><!-- End Recent Activity -->
+          </div>
+          <!-- End Recent Activity -->
 
           <!-- Website Traffic -->
           <div class="card">
@@ -274,9 +263,78 @@
               </script>
 
             </div>
-          </div><!-- End Website Traffic -->
+          </div>
+          <!-- End Website Traffic -->
 
-        </div><!-- End Right side columns -->
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-center">Staff Qualification</h5>
+
+              <!-- Pie Chart -->
+              <div id="pieChart2" style="min-height: 400px;" class="echart"></div>
+
+              <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                  echarts.init(document.querySelector("#pieChart2")).setOption({
+                    title: {
+                      text: 'Referer of a Website',
+                      subtext: 'Fake Data',
+                      left: 'center'
+                    },
+                    tooltip: {
+                      trigger: 'item'
+                    },
+                    legend: {
+                      orient: 'vertical',
+                      left: 'left'
+                    },
+                    series: [{
+                      name: 'Access From',
+                      type: 'pie',
+                      radius: '50%',
+                      data: [{
+                          value: 2,
+                          name: 'PhD'
+                        },
+                        {
+                          value: 12,
+                          name: 'Masters'
+                        },
+                        {
+                          value: 50,
+                          name: 'Degree'
+                        },
+                        {
+                          value: 6,
+                          name: 'HND'
+                        },
+                        {
+                          value: 15,
+                          name: 'Diploma'
+                        },
+                        {
+                          value: 40,
+                          name: 'SHS'
+                        }
+                      ],
+                      emphasis: {
+                        itemStyle: {
+                          shadowBlur: 10,
+                          shadowOffsetX: 0,
+                          shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                      }
+                    }]
+                  });
+                });
+              </script>
+              <!-- End Pie Chart -->
+
+            </div>
+          </div>
+
+        </div>
+        <!-- End Right side columns -->
 
       </div>
     </section>
