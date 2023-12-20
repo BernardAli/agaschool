@@ -158,13 +158,13 @@
 <!--            <a href="{% url 'logout' %}" class="btn btn-primary px-4">Logout</a>-->
           <div class="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                class="nav-link dropdown-toggle btn btn-primary px-4"
                 data-toggle="dropdown"
                 >{{user.username}}</a
               >
               <div class="dropdown-menu rounded-0 m-0">
-                <a href="{% url 'profile' request.user.username %}" class="dropdown-item">Profile</a>
-                <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+                <a href="{% url 'profile' request.user.username %}" class="dropdown-item"><i class="fas fa-user"></i> Profile</a>
+                <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
               </div>
             </div>
           {% else %}

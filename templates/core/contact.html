@@ -40,13 +40,27 @@
           <div class="col-lg-7 mb-5">
             <div class="contact-form">
               <div id="success"></div>
-              <form name="sentMessage" id="contactForm" novalidate="novalidate">
+              <form method="post">
+                {% csrf_token %}
                 <div class="control-group">
                   <input
                     type="text"
                     class="form-control"
                     id="name"
+                    name="name"
                     placeholder="Your Name"
+                    required="required"
+                    data-validation-required-message="Please enter your name"
+                  />
+                  <p class="help-block text-danger"></p>
+                </div>
+                <div class="control-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="contact"
+                    name="contact"
+                    placeholder="Your Contact"
                     required="required"
                     data-validation-required-message="Please enter your name"
                   />
@@ -57,6 +71,7 @@
                     type="email"
                     class="form-control"
                     id="email"
+                    name="email"
                     placeholder="Your Email"
                     required="required"
                     data-validation-required-message="Please enter your email"
@@ -68,6 +83,7 @@
                     type="text"
                     class="form-control"
                     id="subject"
+                    name="subject"
                     placeholder="Subject"
                     required="required"
                     data-validation-required-message="Please enter a subject"
@@ -79,6 +95,7 @@
                     class="form-control"
                     rows="6"
                     id="message"
+                    name="message"
                     placeholder="Message"
                     required="required"
                     data-validation-required-message="Please enter your message"
@@ -141,8 +158,8 @@
               ></i>
               <div class="pl-3">
                 <h5>Opening Hours</h5>
-                <strong>Sunday - Friday:</strong>
-                <p class="m-0">08:00 AM - 05:00 PM</p>
+                <strong>Monday - Friday:</strong>
+                <p class="m-0">07:00 AM - 05:00 PM</p>
               </div>
             </div>
           </div>

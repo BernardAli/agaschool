@@ -58,9 +58,15 @@
             <div class="row pt-2 pb-4">
               <div class="col-12">
                 <ul class="list-inline m-0">
+                  {% if profile.type == 'Student/Parent' %}
                   <li class="py-2 border-top border-bottom">
                     <i class="fa fa-check text-primary mr-3"></i>{{profile.full_name}}
                   </li>
+                  {% for name in  profile.classes.all %}
+                  <li class="py-2 border-top border-bottom">
+                    <i class="fa fa-check text-primary mr-3"></i>{{name}}
+                  </li>
+                  {% endfor %}
                   <li class="py-2 border-bottom">
                     <i class="fa fa-check text-primary mr-3"></i>{{profile.gender}}
                   </li>
@@ -68,8 +74,36 @@
                     <i class="fa fa-check text-primary mr-3"></i>{{profile.phone}}
                   </li>
                   <li class="py-2 border-bottom">
-                    <i class="fa fa-check text-primary mr-3"></i>{{profile.region}} Region
+                    <i class="fa fa-check text-primary mr-3"></i>{{profile.residence}}, {{profile.region}} Region
                   </li>
+                  {% endif %}
+                  {% if profile.type == 'Teacher' %}
+                  <li class="py-2 border-top border-bottom">
+                    <i class="fa fa-check text-primary mr-3"></i>{{profile.full_name}}
+                  </li>
+                  <li class="py-2 border-top border-bottom">
+                    <i class="fa fa-check text-primary mr-3"></i>{{profile.marital_status}}
+                  </li>
+                  {% for name in  profile.subjects.all %}
+                  <li class="py-2 border-top border-bottom">
+                    <i class="fa fa-check text-primary mr-3"></i>{{name}}
+                  </li>
+                  {% endfor %}
+                  {% for name in  profile.classes.all %}
+                  <li class="py-2 border-top border-bottom">
+                    <i class="fa fa-check text-primary mr-3"></i>{{name}}
+                  </li>
+                  {% endfor %}
+                  <li class="py-2 border-bottom">
+                    <i class="fa fa-check text-primary mr-3"></i>{{profile.gender}}
+                  </li>
+                  <li class="py-2 border-bottom">
+                    <i class="fa fa-check text-primary mr-3"></i>{{profile.phone}}
+                  </li>
+                  <li class="py-2 border-bottom">
+                    <i class="fa fa-check text-primary mr-3"></i>{{profile.residence}}, {{profile.region}} Region
+                  </li>
+                  {% endif %}
                 </ul>
               </div>
             </div>
@@ -90,6 +124,12 @@
               <h4>Accounts</h4>
             </a>
           </li><!-- End Tab 1 Nav -->
+
+          <li class="nav-item col-4 col-md-4 col-lg-3">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-4">
+              <h4>Results</h4>
+            </a>
+          </li><!-- End Tab 3 Nav -->
 
           <li class="nav-item col-4 col-md-4 col-lg-3">
             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2">
@@ -130,7 +170,8 @@
                 <img src="assets/img/features-1.svg" alt="" class="img-fluid">
               </div>
             </div>
-          </div><!-- End Tab Content 1 -->
+          </div>
+          <!-- End Tab Content 1 -->
 
           <div class="tab-pane" id="tab-2">
             <div class="row">
@@ -160,14 +201,49 @@
           <div class="tab-pane" id="tab-3">
             <div class="row">
               <div class="col-lg-8 order-2 order-lg-1">
-                <h4>Account Settings</h4>
-                <a href="{% url 'edit_profile' user.username %}" class="btn btn-primary mt-2 py-2 px-4"><i class="fa fa-edit mr-3"></i> Edit Profile</a>
+                <div class="text-center">
+                  <h4>Account Settings</h4>
+                  {% if profile.type == 'Student/Parent' %}
+                  <a href="{% url 'update_student' user.username %}" class="btn btn-primary mt-2 py-2 px-4">
+                    <i class="fa fa-edit mr-3"></i> Edit Profile</a>
+                  {% endif %}
+                  {% if profile.type == 'Teacher' %}
+                  <a href="{% url 'update_teacher' user.username %}" class="btn btn-primary mt-2 py-2 px-4">
+                    <i class="fa fa-edit mr-3"></i> Edit Profile</a>
+                  {% endif %}
+                </div>
               </div>
               <div class="col-lg-4 order-1 order-lg-2 text-center">
                 <img src="assets/img/features-3.svg" alt="" class="img-fluid">
               </div>
             </div>
           </div><!-- End Tab Content 3 -->
+
+          <div class="tab-pane show" id="tab-4">
+            <div class="row">
+              <div class="col-lg-8 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="100">
+                <h4>Results</h4>
+                <ul class="list-inline m-0">
+                  <li class="py-2 border-top border-bottom">
+                    <i class="fa fa-check text-primary mr-3"></i>Labore eos amet
+                    dolor amet diam
+                  </li>
+                  <li class="py-2 border-bottom">
+                    <i class="fa fa-check text-primary mr-3"></i>Etsea et sit
+                    dolor amet ipsum
+                  </li>
+                  <li class="py-2 border-bottom">
+                    <i class="fa fa-check text-primary mr-3"></i>Diam dolor diam
+                    elitripsum vero.
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-4 order-1 order-lg-2 text-center" data-aos="fade-up" data-aos-delay="200">
+                <img src="assets/img/features-1.svg" alt="" class="img-fluid">
+              </div>
+            </div>
+          </div>
+          <!-- End Tab Content 4 -->
 
         </div>
 

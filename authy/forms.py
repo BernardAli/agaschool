@@ -16,11 +16,22 @@ class MyUserCreationForm(UserCreationForm):
                   'phone', 'residence', 'GPS_Address', 'region']
 
 
-class UserForm(ModelForm):
+general_fields = ['full_name', "phone", 'email', "avatar", 'residence', 'GPS_Address', "region", 'nationality']
+
+
+class StudentForm(ModelForm):
     class Meta:
         model = User
-        fields = ['full_name', "phone", 'email', "avatar", 'residence', 'GPS_Address', "region",  "facebook_url", "twitter_url", "instagram_url",
-                  "linkedin_url", "website_url"]
+        fields = general_fields
+        widgets = {
+            "user_type": forms.Select(attrs={'onchange': "update();"}),
+        }
+
+
+class TeacherForm(ModelForm):
+    class Meta:
+        model = User
+        fields = general_fields + ["facebook_url", "twitter_url", "instagram_url", "linkedin_url", "website_url"]
         widgets = {
             "user_type": forms.Select(attrs={'onchange': "update();"}),
         }

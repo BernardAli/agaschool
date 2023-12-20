@@ -3,7 +3,7 @@ from .models import (
     Class, GalleryCategory, Gallery, GamesCategory, Games, Transportation,
     Route, OurCareer, Article, ArticlesCategories, Subject, AdmissionForm, OnlineApplication, Journal, Calendar,
     Announcement, OtherFee, Library, FAQ, ScheduleVisit, Newsletter, Assignment, SubmitAssignment, VirtualClass,
-    Management, Counselor, ArticleComment, JournalComment, Driver, Award)
+    Management, Counselor, ArticleComment, JournalComment, Driver, Award, Query)
 
 # Register your models here.
 
@@ -38,3 +38,4 @@ admin.site.register(Management)
 admin.site.register(Counselor)
 admin.site.register(Driver)
 admin.site.register(Award)
+admin.site.register(Query)

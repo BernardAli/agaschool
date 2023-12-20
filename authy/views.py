@@ -9,7 +9,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.utils import timezone
 from django.views.generic import DeleteView
 
-from authy.forms import MyUserCreationForm, UserForm
+from authy.forms import MyUserCreationForm, StudentForm, TeacherForm
 from authy.models import User
 
 
@@ -103,10 +103,48 @@ def profile(request, username):
 @login_required(login_url='login')
 def update_user(request, username):
     user = get_object_or_404(User, username=username)
-    form = UserForm(instance=user)
+    form = StudentForm(instance=user)
 
     if request.method == 'POST':
-        form = UserForm(request.POST, request.FILES, instance=user)
+        form = StudentForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Your profile has been updated!')
+            return redirect(f'profile', user.username)
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'authy/edit_profile.html', context)
+
+
+@login_required(login_url='login')
+def update_student(request, username):
+    user = get_object_or_404(User, username=username)
+    form = StudentForm(instance=user)
+
+    if request.method == 'POST':
+        form = StudentForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Your profile has been updated!')
+            return redirect(f'profile', user.username)
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'authy/edit_profile.html', context)
+
+
+@login_required(login_url='login')
+def update_teacher(request, username):
+    user = get_object_or_404(User, username=username)
+    form = TeacherForm(instance=user)
+
+    if request.method == 'POST':
+        form = TeacherForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
             messages.success(request, f'Your profile has been updated!')

@@ -10,7 +10,7 @@ from .forms import OnlineApplicationForm
 from .models import Class, GalleryCategory, Gallery, GamesCategory, Games, Transportation, Route, OurCareer, Testimony, \
     Article, Subject, AdmissionForm, OnlineApplication, Journal, Calendar, Announcement, OtherFee, Library, FAQ, \
     ScheduleVisit, Newsletter, Assignment, SubmitAssignment, VirtualClass, Management, Counselor, ArticleComment, \
-    JournalComment, Award
+    JournalComment, Award, Query
 
 today = datetime.today()
 
@@ -88,8 +88,16 @@ def class_detail(request, slug):
 
 
 def contact(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        contact = request.POST['contact']
+        email = request.POST['email']
+        subject = request.POST['subject']
+        message = request.POST['message']
+        query = Query.objects.create(name=name, contact=contact, email=email, subject=subject, message=message)
+        query.save()
+        return redirect('contact')
     context = {
-
     }
     return render(request, 'core/contact.html', context)
 

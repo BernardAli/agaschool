@@ -13,6 +13,7 @@ USER_STATUS = (
 USER_TYPE = (
     ('Student/Parent', 'Student/Parent'),
     ('Teacher', 'Teacher'),
+    ('Other Staff', 'Other Staff'),
 )
 
 MARITAL_STATUS = (
@@ -48,20 +49,26 @@ REGION_CHOICE = (
 
 
 class User(AbstractUser):
+    # General
     full_name = models.CharField(max_length=200, null=True)
+    type = models.CharField(max_length=20, choices=USER_TYPE)
     email = models.EmailField(unique=True, null=True)
     phone = models.CharField(max_length=20)
     avatar = models.ImageField(null=True, default="default.jpg")
-    background_img = models.ImageField(default='home-bg.jpg', upload_to='background_pics')
     gender = models.CharField(max_length=100, choices=GENDER_CHOICE, null=True, blank=True)
-    marital_status = models.CharField(max_length=100, choices=MARITAL_STATUS, default='Single')
-    region = models.CharField(max_length=100, choices=REGION_CHOICE, null=True, blank=True)
     residence = models.CharField(max_length=100)
-    GPS_Address = models.CharField(max_length=10)
+    GPS_Address = models.CharField(max_length=15)
+    region = models.CharField(max_length=100, choices=REGION_CHOICE, null=True, blank=True)
     nationality = models.CharField(max_length=100, default='Ghanaian')
-
     created = models.DateField(auto_now_add=True)
     is_blocked = models.BooleanField(default=False)
+    classes = models.ManyToManyField('core.Class', related_name='classes', blank=True)
+
+    # Teachers
+    marital_status = models.CharField(max_length=100, choices=MARITAL_STATUS, default='Single')
+    subjects = models.ManyToManyField('core.Subject', related_name='subjects', blank=True)
+    profile = models.TextField(blank=True, null=True)
+    cv = models.FileField(blank=True, null=True)
     facebook_url = models.URLField(max_length=255, blank=True, null=True)
     twitter_url = models.URLField(max_length=255, blank=True, null=True)
     instagram_url = models.URLField(max_length=255, blank=True, null=True)
