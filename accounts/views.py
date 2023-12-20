@@ -17,3 +17,11 @@ def account_home(request):
         'classes': classes,
     }
     return render(request, 'accounts/home.html', context)
+
+
+def all_students(request):
+    students = User.objects.all()
+    context = {
+        'students': students,
+    }
+    return render(request, 'accounts/all_students.html', context)
