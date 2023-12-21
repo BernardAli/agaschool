@@ -82,20 +82,24 @@
                   <table class="table table-striped table-hover datatable">
                     <thead>
                       <tr>
-                        <th>Name</th>
-                        <th>Gender</th>
-                        <th>Contact</th>
-                        <th>Address</th>
+                        <th>Subject</th>
+                        <th>Teacher</th>
+                        <th>Description</th>
+                        <th>Outline</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {% for person in staff %}
+                      {% for subject in subjects %}
                         <tr>
-                        <td><a href="{% url 'account_profile' person.username %}">{{person.full_name}}</a></td>
-                        <td>{{person.gender}}</td>
-                        <td>{{person.phone}}</td>
-                        <td>{{person.residence}}</td>
-                      </tr>
+                          <td><a href="">{{subject.name}}</a></td>
+                          <td><a href="{% url 'account_profile' subject.teacher.username %}">{{subject.teacher.full_name}}</a></td>
+                          <td>{{subject.description|truncatechars:50}}</td>
+                          {% if subject.subject_outline_file %}
+                          <td><a href="{{subject.subject_outline_file.url}}">Download Outline</a></td>
+                          {% else %}
+                          <td>No Outline</td>
+                          {% endif %}
+                        </tr>
                       {% endfor %}
                     </tbody>
                   </table>
