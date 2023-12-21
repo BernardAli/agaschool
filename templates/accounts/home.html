@@ -239,8 +239,8 @@
                     <tbody>
                       {% for class in classes %}
                         <tr>
-                        <th scope="row"><a href="#"><img src="{{class.picture.url}}" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">{{class.name}}</a></td>
+                        <th scope="row"><a href="{% url 'account_class_detail' class.slug %}"><img src="{{class.picture.url}}" alt=""></a></th>
+                        <td><a href="{% url 'account_class_detail' class.slug %}" class="text-primary fw-bold">{{class.name}}</a></td>
                         <td>{{class.teacher.full_name}}</td>
                         <td class="fw-bold">24</td>
                         <td>$5,828</td>

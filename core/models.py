@@ -16,7 +16,10 @@ LEVEL_CHOICES = (
 class Subject(models.Model):
     name = models.CharField(max_length=50)
     level = models.CharField(max_length=15, choices=LEVEL_CHOICES)
+    teacher = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    classes = models.ManyToManyField('core.Class', related_name='taught_class', blank=True)
     description = models.TextField()
+    subject_outline_file = models.FileField(blank=True, null=True)
 
     def __str__(self):
         return self.name
