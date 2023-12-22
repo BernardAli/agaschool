@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy
+from django.views.generic import DeleteView, ListView, DetailView, CreateView, UpdateView
 
 from accounts.forms import SubjectForm, ClassForm
+from accounts.models import CashCenter, IncomeExpenditure
 from authy.forms import MyUserCreationForm
 from authy.models import User
 from core.models import Class, Subject
@@ -103,3 +106,52 @@ def account_profile(request, username):
         'profile': profile,
     }
     return render(request, 'accounts/account_profile.html', context)
+
+
+class CashCenterListView(ListView):
+    template_name = 'accounts/cash_center_list.html'
+    model = CashCenter
+    context_object_name = 'cash_centers'
+
+
+class CashCenterDetailView(DetailView):
+    model = CashCenter
+    template_name = 'accounts/cash_center_details.html'
+
+
+class CashCenterCreateView(CreateView):
+    model = CashCenter
+    template_name = 'accounts/cash_center_create.html'
+    fields = "__all__"
+    success_url = reverse_lazy("cash_center_list")
+
+
+class CashCenterUpdateView(UpdateView):
+    model = CashCenter
+    context_object_name = 'cash_center'
+    template_name = 'accounts/cash_center_update.html'
+    fields = ['name', 'description']
+    success_url = reverse_lazy("cash_center_list")
+
+
+class CashCenterDeleteView(DeleteView):
+    model = CashCenter
+    context_object_name = 'cash_center'
+    template_name = 'accounts/cash_center_delete.html'
+    success_url = reverse_lazy("category_list")
+
+
+def income_expenditure(request):
+    income_expenditures = IncomeExpenditure.objects.all()
+    context = {
+        'income_expenditures': income_expenditures,
+    }
+    return render(request, 'accounts/income_expenditure.html', context)
+
+
+class IECreateView(CreateView):
+    model = IncomeExpenditure
+    template_name = 'accounts/income_expenditure_create.html'
+    fields = ['center', 'item_name', 'balance']
+    success_url = reverse_lazy("income_expenditure")
+
